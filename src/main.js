@@ -4,19 +4,32 @@ import CardDeck from './card-deck';
 import Player from './player';
 
 const gameState = {
-  status: GAME_STATES.PLAYING,
+  status: GAME_STATES.INITIALIZING,
   numPlayers: 0,
   currentRound: 0,
   nextPlayerTurn: 0,
   players: [],
 };
 
-function createPlayers() {
-  const playerA = new Player({ role: ROLES.MP });
-  const playerB = new Player({ role: ROLES.COMMONER });
+function createPlayers(playerCount) {
+  gameState.players = [];
 
-  gameState.numPlayers = 2;
-  gameState.players = [playerA, playerB];
+  if (playerCount === 1) {
+    // if one person is playing, set second player as computer
+    const playerA = new Player({ role: ROLES.MP, isComputer: false });
+    const playerB = new Player({ role: ROLES.COMMONER, isComputer: true });
+    gameState.players.push(playerA, playerB);
+  } else {
+    // if two to four people are playing, no player is a computer and there is one Commoner
+    for (let i = 0; i < playerCount; i += 1) {
+      // last player is a commoner
+      const role = i === playerCount - 1 ? ROLES.COMMONER : ROLES.MP;
+      const player = new Player({ role, isComputer: false });
+      gameState.players.push(player);
+    }
+  }
+
+  gameState.numPlayers = gameState.players.length;
 }
 
 function updateGameStateUI() {
@@ -36,6 +49,7 @@ function updateGameStateUI() {
       <b>Index:</b> ${i}
       <b>, Role: </b> ${playerState.role} 
       <b>, Position: </b> ${playerState.position}
+      ${playerState.isComputer && '<i>(computer player)</i>'}
     </div>`
     )
     .join(' ');
@@ -59,6 +73,25 @@ function updateGameOverStatus(player, playerIndex) {
 
   nextTurnStateEl.style.display = 'none';
   gameOverStateEl.innerHTML = `<h3>Game Over</h3>  Player ${playerIndex} the ${player.role} has won the game`;
+}
+
+function startGame() {
+  const initializeGameStateEl = document.getElementById('initialize-game-state');
+  const curentTurnStateEl = document.getElementById('current-turn-state');
+  const nextTurnStateEl = document.getElementById('next-turn-state');
+
+  const playerCountValue = document.querySelector(
+    'input[name="select-player-count"]:checked'
+  ).value;
+
+  const playerCount = parseInt(playerCountValue, 10);
+
+  createPlayers(playerCount);
+  updateGameStateUI();
+
+  initializeGameStateEl.remove();
+  curentTurnStateEl.style.display = 'block';
+  nextTurnStateEl.style.display = 'block';
 }
 
 const MpCardDeck = new CardDeck(ROLES.MP);
@@ -90,6 +123,9 @@ function nextTurn() {
 
 const nextTurnButton = document.getElementById('next-turn-button');
 nextTurnButton.addEventListener('click', nextTurn);
+
+const startGameButton = document.getElementById('start-game-button');
+startGameButton.addEventListener('click', startGame);
 
 createPlayers();
 updateGameStateUI();

@@ -2,10 +2,11 @@ import { MAX_COMMONER_POSITION, MAX_MP_POSITION, ROLES } from './constants';
 import createId from './utilities/create-id';
 
 export default class Player {
-  constructor({ role }) {
+  constructor({ role, isComputer }) {
     this.id = createId();
 
     this.role = role;
+    this.isComputer = isComputer;
     this.position = 0;
     this.isWinner = false;
   }

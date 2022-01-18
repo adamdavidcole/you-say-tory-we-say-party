@@ -20,7 +20,31 @@
       </div>
     </div>
 
-    <div>
+    <div id="initialize-game-state">
+      <h3>Start game</h3>
+      <div>Select number of players:</div>
+      <div>
+        <input type="radio" id="1" name="select-player-count" value="1" checked />
+        <label for="1">1</label>
+      </div>
+
+      <div>
+        <input type="radio" id="2" name="select-player-count" value="2" />
+        <label for="2">2</label>
+      </div>
+
+      <div>
+        <input type="radio" id="3" name="select-player-count" value="3" />
+        <label for="3">3</label>
+      </div>
+      <div>
+        <input type="radio" id="4" name="select-player-count" value="4" />
+        <label for="4">4</label>
+      </div>
+      <button id="start-game-button">Start game</button>
+    </div>
+
+    <div id="current-turn-state" style="display: none">
       <h3>Current Turn State</h3>
       <div>Current turn player: <span id="current-player-turn"></span></div>
       <div>Current turn card text: <span id="current-turn-card-text"></span></div>
@@ -29,7 +53,7 @@
       </div>
     </div>
 
-    <div id="next-turn-state">
+    <div id="next-turn-state" style="display: none">
       <h3>Next Turn State</h3>
       <div>Next player turn <span id="next-player-turn"></span></div>
       <button id="next-turn-button">Next turn</button>
