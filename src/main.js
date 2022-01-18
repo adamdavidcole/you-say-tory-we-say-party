@@ -16,15 +16,15 @@ function createPlayers(playerCount) {
 
   if (playerCount === 1) {
     // if one person is playing, set second player as computer
-    const playerA = new Player({ role: ROLES.MP, isComputer: false });
-    const playerB = new Player({ role: ROLES.COMMONER, isComputer: true });
+    const playerA = new Player({ role: ROLES.MP, index: 0, isComputer: false });
+    const playerB = new Player({ role: ROLES.COMMONER, index: 1, isComputer: true });
     gameState.players.push(playerA, playerB);
   } else {
     // if two to four people are playing, no player is a computer and there is one Commoner
     for (let i = 0; i < playerCount; i += 1) {
       // last player is a commoner
       const role = i === playerCount - 1 ? ROLES.COMMONER : ROLES.MP;
-      const player = new Player({ role, isComputer: false });
+      const player = new Player({ role, index: i, isComputer: false });
       gameState.players.push(player);
     }
   }
@@ -38,31 +38,35 @@ function updateGameStateUI() {
   const nextPlayerTurnEl = document.getElementById('next-player-turn');
   const currentPlayerPositionsEl = document.getElementById('current-player-positions');
 
+  const nextPlayer = gameState.players[gameState.nextPlayerTurn];
+
   currentStatusEl.innerText = gameState.status;
   currentRoundEl.innerText = gameState.currentRound;
-  nextPlayerTurnEl.innerText = gameState.nextPlayerTurn;
+  nextPlayerTurnEl.innerText = nextPlayer.name;
 
   currentPlayerPositionsEl.innerHTML = gameState.players
     .map(
-      (playerState, i) => `
+      (player, i) => `
     <div>
-      <b>Index:</b> ${i}
-      <b>, Role: </b> ${playerState.role} 
-      <b>, Position: </b> ${playerState.position}
-      ${playerState.isComputer && '<i>(computer player)</i>'}
+      <b>Name:</b> ${player.name}
+      <b>, Role: </b> ${player.role} 
+      <b>, Position: </b> ${player.position}
+      ${player.isComputer ? '<i>(computer player)</i>' : ''}
     </div>`
     )
     .join(' ');
 }
 
 function updateGameTurnUI({ card, currentPlayerTurnIndex }) {
+  const currPlayer = gameState.players[currentPlayerTurnIndex];
+
   const currentPlayerTextEl = document.getElementById('current-player-turn');
   const currentTurnCardTextEl = document.getElementById('current-turn-card-text');
   const currentTurnCardPositionChangeTextEl = document.getElementById(
     'current-turn-card-position-change-text'
   );
 
-  currentPlayerTextEl.innerHTML = currentPlayerTurnIndex;
+  currentPlayerTextEl.innerHTML = currPlayer.name;
   currentTurnCardTextEl.innerHTML = card.text;
   currentTurnCardPositionChangeTextEl.innerHTML = card.positionChangeText;
 }
@@ -72,7 +76,7 @@ function updateGameOverStatus(player, playerIndex) {
   const gameOverStateEl = document.getElementById('game-over-state');
 
   nextTurnStateEl.style.display = 'none';
-  gameOverStateEl.innerHTML = `<h3>Game Over</h3>  Player ${playerIndex} the ${player.role} has won the game`;
+  gameOverStateEl.innerHTML = `<h3>Game Over</h3> ${player.name} the ${player.role} has won the game`;
 }
 
 function startGame() {
@@ -87,6 +91,8 @@ function startGame() {
   const playerCount = parseInt(playerCountValue, 10);
 
   createPlayers(playerCount);
+  gameState.status = GAME_STATES.PLAYING;
+
   updateGameStateUI();
 
   initializeGameStateEl.remove();

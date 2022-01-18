@@ -92,7 +92,7 @@ const MpCards = [
     positionChange: 3,
   },
   {
-    text: 'Your caught driving 250 miles out of London to Durham during a tier 1 lock-down.',
+    text: 'You’re caught driving 250 miles out of London to Durham during a tier 1 lock-down.',
     positionChangeText: 'Move back 1 step.',
     positionChange: -1,
   },
