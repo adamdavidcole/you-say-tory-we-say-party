@@ -1,0 +1,20 @@
+/* Opinionated CSS defaults based on:
+  ! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css 
+*/
+
+body {
+  margin: 20px;
+}
+
+#current-game-state > div {
+  margin-bottom: 10px;
+}
+
+#current-player-positions {
+  margin-top: 10px;
+  margin-left: 25px;
+}
+
+#current-turn-card-text {
+  margin-bottom: 25px;
+}
