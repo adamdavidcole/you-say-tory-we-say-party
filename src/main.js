@@ -1,23 +1,23 @@
 /* eslint-disable arrow-parens */
-import { ROLES } from './constants';
+import { ROLES, GAME_STATES } from './constants';
 import CardDeck from './card-deck';
+import Player from './player';
 
 const gameState = {
-  status: 'PLAYING',
-  numPlayers: 2,
+  status: GAME_STATES.PLAYING,
+  numPlayers: 0,
   currentRound: 0,
   nextPlayerTurn: 0,
-  playersState: [
-    {
-      role: ROLES.MP,
-      position: 0,
-    },
-    {
-      role: ROLES.COMMONER,
-      position: 0,
-    },
-  ],
+  players: [],
 };
+
+function createPlayers() {
+  const playerA = new Player({ role: ROLES.MP });
+  const playerB = new Player({ role: ROLES.COMMONER });
+
+  gameState.numPlayers = 2;
+  gameState.players = [playerA, playerB];
+}
 
 function updateGameStateUI() {
   const currentStatusEl = document.getElementById('current-status');
@@ -29,11 +29,11 @@ function updateGameStateUI() {
   currentRoundEl.innerText = gameState.currentRound;
   nextPlayerTurnEl.innerText = gameState.nextPlayerTurn;
 
-  currentPlayerPositionsEl.innerHTML = gameState.playersState
+  currentPlayerPositionsEl.innerHTML = gameState.players
     .map(
       (playerState, i) => `
     <div>
-      <b>ID:</b> ${i}
+      <b>Index:</b> ${i}
       <b>, Role: </b> ${playerState.role} 
       <b>, Position: </b> ${playerState.position}
     </div>`
@@ -41,16 +41,24 @@ function updateGameStateUI() {
     .join(' ');
 }
 
-function updateGameTurnUI({ card, currentPlayerTurnId }) {
+function updateGameTurnUI({ card, currentPlayerTurnIndex }) {
   const currentPlayerTextEl = document.getElementById('current-player-turn');
   const currentTurnCardTextEl = document.getElementById('current-turn-card-text');
   const currentTurnCardPositionChangeTextEl = document.getElementById(
     'current-turn-card-position-change-text'
   );
 
-  currentPlayerTextEl.innerHTML = currentPlayerTurnId;
+  currentPlayerTextEl.innerHTML = currentPlayerTurnIndex;
   currentTurnCardTextEl.innerHTML = card.text;
   currentTurnCardPositionChangeTextEl.innerHTML = card.positionChangeText;
+}
+
+function updateGameOverStatus(player, playerIndex) {
+  const nextTurnStateEl = document.getElementById('next-turn-state');
+  const gameOverStateEl = document.getElementById('game-over-state');
+
+  nextTurnStateEl.style.display = 'none';
+  gameOverStateEl.innerHTML = `<h3>Game Over</h3>  Player ${playerIndex} the ${player.role} has won the game`;
 }
 
 const MpCardDeck = new CardDeck(ROLES.MP);
@@ -60,22 +68,28 @@ function getCardDeck(role) {
 }
 
 function nextTurn() {
-  const currentPlayerTurnId = gameState.nextPlayerTurn;
-  const currPlayerState = gameState.playersState[currentPlayerTurnId];
+  const currentPlayerTurnIndex = gameState.nextPlayerTurn;
+  const currPlayer = gameState.players[currentPlayerTurnIndex];
 
-  const cardDeck = getCardDeck(currPlayerState.role);
+  const cardDeck = getCardDeck(currPlayer.role);
   const card = cardDeck.drawCard();
-  const nextPosition = currPlayerState.position + card.positionChange;
-  currPlayerState.position = Math.max(0, nextPosition); //   // ensure we don't move behind 0
+  currPlayer.updatePosition(card.positionChange);
+  const hasPlayerWon = currPlayer.checkHasPlayerWon();
 
-  gameState.nextPlayerTurn = (gameState.nextPlayerTurn + 1) % gameState.numPlayers;
-  if (gameState.nextPlayerTurn === 0) gameState.currentRound += 1;
+  if (hasPlayerWon) {
+    gameState.status = GAME_STATES.GAME_OVER;
+    updateGameOverStatus(currPlayer, currentPlayerTurnIndex);
+  } else {
+    gameState.nextPlayerTurn = (gameState.nextPlayerTurn + 1) % gameState.numPlayers;
+    if (gameState.nextPlayerTurn === 0) gameState.currentRound += 1;
+  }
 
   updateGameStateUI();
-  updateGameTurnUI({ card, currentPlayerTurnId });
+  updateGameTurnUI({ card, currentPlayerTurnIndex });
 }
 
 const nextTurnButton = document.getElementById('next-turn-button');
 nextTurnButton.addEventListener('click', nextTurn);
 
+createPlayers();
 updateGameStateUI();
