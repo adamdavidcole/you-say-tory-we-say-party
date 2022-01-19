@@ -2,6 +2,7 @@
 import { ROLES, GAME_STATES } from './constants';
 import CardDeck from './card-deck';
 import Player from './player';
+import GameDisplay from './game-display';
 
 const gameState = {
   status: GAME_STATES.INITIALIZING,
@@ -36,25 +37,12 @@ function updateGameStateUI() {
   const currentStatusEl = document.getElementById('current-status');
   const currentRoundEl = document.getElementById('current-round');
   const nextPlayerTurnEl = document.getElementById('next-player-turn');
-  const currentPlayerPositionsEl = document.getElementById('current-player-positions');
 
   const nextPlayer = gameState.players[gameState.nextPlayerTurn];
 
   currentStatusEl.innerText = gameState.status;
   currentRoundEl.innerText = gameState.currentRound;
   nextPlayerTurnEl.innerText = nextPlayer.name;
-
-  currentPlayerPositionsEl.innerHTML = gameState.players
-    .map(
-      (player, i) => `
-    <div>
-      <b>Name:</b> ${player.name}
-      <b>, Role: </b> ${player.role} 
-      <b>, Position: </b> ${player.position}
-      ${player.isComputer ? '<i>(computer player)</i>' : ''}
-    </div>`
-    )
-    .join(' ');
 }
 
 function updateGameTurnUI({ card, currentPlayerTurnIndex }) {
@@ -132,6 +120,15 @@ nextTurnButton.addEventListener('click', nextTurn);
 
 const startGameButton = document.getElementById('start-game-button');
 startGameButton.addEventListener('click', startGame);
+
+const gameDisplay = new GameDisplay(gameState);
+
+function draw() {
+  gameDisplay.draw();
+  requestAnimationFrame(draw);
+}
+
+requestAnimationFrame(draw);
 
 createPlayers();
 updateGameStateUI();

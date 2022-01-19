@@ -18,3 +18,15 @@ body {
 #current-turn-card-text {
   margin-bottom: 25px;
 }
+
+#gameDetails {
+  position: relative;
+  top: 325px;
+}
+
+#gameDisplay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}

@@ -7,59 +7,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
-    <h1>You Say Tory, We Say Party</h1>
-    <h4>A game where you’ll have so much fun, you’ll forget how angry you are!</h4>
+    <div id="gameDetails">
+      <h1>You Say Tory, We Say Party</h1>
+      <h4>A game where you’ll have so much fun, you’ll forget how angry you are!</h4>
 
-    <div id="current-game-state">
-      <h3>Game State</h3>
-      <div>Current game status <span id="current-status"></span></div>
-      <div>Current round <span id="current-round"></span></div>
-      <div>
-        Current player poisitions
-        <div id="current-player-positions"></div>
+      <div id="current-game-state">
+        <h3>Game State</h3>
+        <div>Current game status <span id="current-status"></span></div>
+        <div>Current round <span id="current-round"></span></div>
       </div>
+
+      <div id="initialize-game-state">
+        <h3>Start game</h3>
+        <div>Select number of players:</div>
+        <div>
+          <input type="radio" id="1" name="select-player-count" value="1" checked />
+          <label for="1">1</label>
+        </div>
+
+        <div>
+          <input type="radio" id="2" name="select-player-count" value="2" />
+          <label for="2">2</label>
+        </div>
+
+        <div>
+          <input type="radio" id="3" name="select-player-count" value="3" />
+          <label for="3">3</label>
+        </div>
+        <div>
+          <input type="radio" id="4" name="select-player-count" value="4" />
+          <label for="4">4</label>
+        </div>
+        <button id="start-game-button">Start game</button>
+      </div>
+
+      <div id="current-turn-state" style="display: none">
+        <h3>Current Turn State</h3>
+        <div>Current turn player: <span id="current-player-turn"></span></div>
+        <div>Current turn card text: <span id="current-turn-card-text"></span></div>
+        <div>
+          Current turn card position change:
+          <span id="current-turn-card-position-change-text"></span>
+        </div>
+      </div>
+
+      <div id="next-turn-state" style="display: none">
+        <h3>Next Turn State</h3>
+        <div>Next player turn <span id="next-player-turn"></span></div>
+        <button id="next-turn-button">Next turn</button>
+      </div>
+
+      <div id="game-over-state"></div>
     </div>
 
-    <div id="initialize-game-state">
-      <h3>Start game</h3>
-      <div>Select number of players:</div>
-      <div>
-        <input type="radio" id="1" name="select-player-count" value="1" checked />
-        <label for="1">1</label>
-      </div>
-
-      <div>
-        <input type="radio" id="2" name="select-player-count" value="2" />
-        <label for="2">2</label>
-      </div>
-
-      <div>
-        <input type="radio" id="3" name="select-player-count" value="3" />
-        <label for="3">3</label>
-      </div>
-      <div>
-        <input type="radio" id="4" name="select-player-count" value="4" />
-        <label for="4">4</label>
-      </div>
-      <button id="start-game-button">Start game</button>
-    </div>
-
-    <div id="current-turn-state" style="display: none">
-      <h3>Current Turn State</h3>
-      <div>Current turn player: <span id="current-player-turn"></span></div>
-      <div>Current turn card text: <span id="current-turn-card-text"></span></div>
-      <div>
-        Current turn card position change: <span id="current-turn-card-position-change-text"></span>
-      </div>
-    </div>
-
-    <div id="next-turn-state" style="display: none">
-      <h3>Next Turn State</h3>
-      <div>Next player turn <span id="next-player-turn"></span></div>
-      <button id="next-turn-button">Next turn</button>
-    </div>
-
-    <div id="game-over-state"></div>
+    <canvas id="gameDisplay" width="480" height="320"></canvas>
 
     <script type="module" src="main.js"></script>
   </body>

@@ -17,7 +17,7 @@ const MpCards = [
     positionChange: 0,
   },
   {
-    text: 'The public finds out you attended a party the day before Queen Elizabeth went to her husbands funeral alone.',
+    text: 'The public finds out you attended a party the day before Queen Elizabeth went to her husband’s funeral alone.',
     positionChangeText: 'Move back 3 steps.',
     positionChange: -3,
   },
@@ -67,7 +67,7 @@ const MpCards = [
     positionChange: 3,
   },
   {
-    text: 'Send an email to over one hundred 10 Downing Street staff inviting them “ "to make the most of the lovely weather and have some socially distanced drinks in the No 10 garden this evening.... bring your own booze!”.',
+    text: 'Send an email to over one hundred Downing Street staff inviting them “to make the most of the lovely weather and have some socially distanced drinks in the No 10 garden this evening.... bring your own booze!”',
     positionChangeText: 'Advance to next area',
     positionChange: 5, // TODO: implement advance to next area
   },
@@ -87,7 +87,7 @@ const MpCards = [
     positionChange: 1,
   },
   {
-    text: 'Buy a dedicated wine fridge  "Wine time Fridays".',
+    text: 'Buy a dedicated wine fridge for "Wine time Fridays".',
     positionChangeText: 'Move forward 3 spaces.',
     positionChange: 3,
   },

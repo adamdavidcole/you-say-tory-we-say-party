@@ -11,7 +11,7 @@ export default class Player {
     this.role = role;
     this.index = index;
     this.isComputer = isComputer;
-    this.position = 0;
+    this.position = 1;
     this.isWinner = false;
 
     if (this.role === ROLES.MP) {
@@ -33,7 +33,7 @@ export default class Player {
 
   ensurePositionWithinBounds() {
     const maxPosition = this.getMaxPosition();
-    if (this.position < 0) this.position = 0;
+    if (this.position <= 1) this.position = 1;
     if (this.position > maxPosition) this.position = maxPosition;
   }
 
