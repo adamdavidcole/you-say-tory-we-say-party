@@ -14,6 +14,9 @@ const mpPlayerAvatars = [
 ];
 const commonerAvatar = document.getElementById('player-commoner-container');
 
+const mpTrackBackgroundImg = document.getElementById('mp-track-background-img');
+const commonerTrackBackgroundImg = document.getElementById('commoner-track-background-img');
+
 export default class GameDisplay {
   constructor(gameState) {
     const canvas = document.getElementById('gameDisplay');
@@ -29,13 +32,10 @@ export default class GameDisplay {
       this.onResize();
     });
 
-    console.log(this.ctx);
-
     this.gameState = gameState;
   }
 
   onResize() {
-    console.log('onResize');
     this.resetSize();
     this.draw();
   }
@@ -72,7 +72,7 @@ export default class GameDisplay {
   getCommonerTrackPosition() {
     const { topBorder, width, height } = this.getMpTrackPosition();
     const commonerLeftBorder = this.width / 2 - width / 5;
-    const commonerTopBorder = topBorder + height + margin;
+    const commonerTopBorder = topBorder + height + 3 * margin;
     const commonerWidth = width / 2.5;
     const commonerHeight = 100;
     const commonerSectionWidth = commonerWidth / MAX_COMMONER_POSITION;
@@ -89,6 +89,8 @@ export default class GameDisplay {
   drawSetting() {
     // MP border
     const { leftBorder, topBorder, width, height, sectionWidth } = this.getMpTrackPosition();
+
+    this.ctx.drawImage(mpTrackBackgroundImg, leftBorder, topBorder, width, height);
 
     this.ctx.beginPath();
     this.ctx.rect(leftBorder, topBorder, width, height);
@@ -112,6 +114,14 @@ export default class GameDisplay {
       commonerHeight,
       commonerSectionWidth,
     } = this.getCommonerTrackPosition();
+
+    this.ctx.drawImage(
+      commonerTrackBackgroundImg,
+      leftBorder,
+      commonerTopBorder - height / 4,
+      width,
+      height
+    );
 
     this.ctx.beginPath();
     this.ctx.rect(commonerLeftBorder, commonerTopBorder, commonerWidth, commonerHeight);
@@ -173,7 +183,6 @@ export default class GameDisplay {
     const commonerRadius = commonerSectionWidth;
     commonerAvatar.style.width = `${commonerRadius}px`;
     const commonerAvaterHeight = commonerAvatar.clientHeight;
-    console.log('commonerAvaterHeight', commonerAvaterHeight);
 
     const xPosition =
       offsetLeft +
@@ -186,7 +195,6 @@ export default class GameDisplay {
       commonerTopBorder + // commoner track within canvas offset
       commonerHeight / 2 - // offset avatar to start halfway within section
       commonerAvaterHeight / 2; // negative offset so avatar is centered within section
-    console.log('yPosition', yPosition);
 
     //commonerAvatar
     commonerAvatar.classList.remove('hidden');
