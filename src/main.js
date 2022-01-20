@@ -11,6 +11,7 @@ const gameState = {
   currentRound: 0,
   nextPlayerTurn: 0,
   players: [],
+  lastCardDrawn: null,
 };
 
 function createPlayers(playerCount) {
@@ -74,14 +75,11 @@ function getCardDeck(role) {
   return role === ROLES.MP ? MpCardDeck : CommonerCardDeck;
 }
 
-function nextTurn() {
+function onCardClose() {
   const currentPlayerTurnIndex = gameState.nextPlayerTurn;
   const currPlayer = gameState.players[currentPlayerTurnIndex];
 
-  const cardDeck = getCardDeck(currPlayer.role);
-  const card = cardDeck.drawCard();
-  showCard(card, currPlayer);
-
+  const card = gameState.lastCardDrawn;
   currPlayer.updatePosition(card.positionChange);
   const hasPlayerWon = currPlayer.checkHasPlayerWon();
 
@@ -94,6 +92,17 @@ function nextTurn() {
   }
 
   updateGameTurnUI();
+}
+
+function nextTurn() {
+  const currentPlayerTurnIndex = gameState.nextPlayerTurn;
+  const currPlayer = gameState.players[currentPlayerTurnIndex];
+
+  const cardDeck = getCardDeck(currPlayer.role);
+  const card = cardDeck.drawCard();
+  showCard(card, currPlayer, onCardClose);
+
+  gameState.lastCardDrawn = card;
 }
 
 const nextTurnButton = document.getElementById('next-turn-button');

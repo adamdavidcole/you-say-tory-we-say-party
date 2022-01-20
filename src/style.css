@@ -55,9 +55,15 @@ body {
   justify-content: center;
   overflow: hidden;
   z-index: 1;
+
+  opacity: 1;
+  transition: opacity 0.15s ease-out;
 }
 #card-container.hidden {
   z-index: -1;
+}
+#card-container.closed {
+  opacity: 0;
 }
 
 #card {
@@ -75,11 +81,20 @@ body {
 
   position: relative;
   top: 0;
-  transition: top 0.5s ease;
+  opacity: 1;
+  transition: top 0.25s ease-out, opacity 0.15s ease-out;
 }
 
 #card-container.hidden #card {
   top: calc(50% + 100px);
+}
+#card.closed {
+  opacity: 0;
+}
+
+#card-close-button-container {
+  text-align: center;
+  margin-top: 10px;
 }
 
 #card-player-name {
