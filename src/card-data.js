@@ -7,7 +7,7 @@ const MpCards = [
     positionChange: 1,
   },
   {
-    text: 'Two people warn you not to cancel the party, but you respond that they are "overreacting".',
+    text: 'Two people warn you to cancel the party, but you respond that they are "overreacting".',
     positionChangeText: 'Move forward 2 steps.',
     positionChange: 2,
   },
@@ -80,6 +80,8 @@ const MpCards = [
     text: 'Go to the Co-op store on the Strand to fill a suitcase with bottles of wine the day before the UK was observing a period of national mourning.',
     positionChangeText: 'Move forward 2 spaces.',
     positionChange: 2,
+    source:
+      'https://www.telegraph.co.uk/politics/2022/01/13/two-parties-held-downing-street-queen-country-mourned-death/',
   },
   {
     text: 'Draw up a plan, named "Operation Save Big Dog", in an attempt to retain your premiership in the face of "partygate" allegations.',
@@ -95,6 +97,8 @@ const MpCards = [
     text: 'You’re caught driving 250 miles out of London to Durham during a tier 1 lock-down.',
     positionChangeText: 'Move back 1 step.',
     positionChange: -1,
+    source:
+      'https://www.theguardian.com/politics/2020/may/22/dominic-cummings-durham-trip-coronavirus-lockdown',
   },
   {
     text: 'Buy gifts to hand out at 10 Downing Christmas party.',
