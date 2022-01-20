@@ -129,6 +129,8 @@ export default class GameDisplay {
   }
 
   drawPlayers() {
+    const { offsetTop, offsetLeft } = this.canvas;
+
     const mpPlayers = this.gameState.players.filter(player => player.role === ROLES.MP);
     const commonerPlayer = this.gameState.players.find(player => player.role === ROLES.COMMONER);
 
@@ -138,18 +140,28 @@ export default class GameDisplay {
     const radius = sectionWidth / 2;
 
     mpPlayers.forEach((mpPlayer, i) => {
+      const mpPlayerAvatar = mpPlayerAvatars[i];
       const gamePosition = mpPlayer.position;
 
-      console.log('topBorder', topBorder, 'height', height, 'radius', radius);
-      const xPosition = leftBorder + gamePosition * sectionWidth - sectionWidth / 2 - radius / 2;
-      const yPosition =
-        topBorder + ((height + 2 * radius) / (mpPlayers.length + 1)) * (mpPlayer.index + 1); // this will need to be tweaked based on game avatar sizes
+      // set width according to section width and get resulting height
+      mpPlayerAvatar.style.width = `${radius}px`;
+      const mpPlayerAvaterHeight = mpPlayerAvatar.clientHeight;
 
-      const mpPlayerAvatar = mpPlayerAvatars[i];
+      const xPosition =
+        offsetLeft + // canvas offset
+        leftBorder + // mp track offset
+        gamePosition * sectionWidth - // player position offset
+        sectionWidth / 2 - // negative offset to be in middle of section
+        radius / 2; // negative offset for avater to be centered in section
+      const yPosition =
+        offsetTop + // canvas offset
+        topBorder + // mp track offset
+        (height / (mpPlayers.length + 1)) * (mpPlayer.index + 1) - // height offset within section based on how many players there are
+        mpPlayerAvaterHeight / 2; // negative offset to center avater within height bounding box
+
       mpPlayerAvatar.classList.remove('hidden');
       mpPlayerAvatar.style.left = `${xPosition}px`;
       mpPlayerAvatar.style.top = `${yPosition}px`;
-      mpPlayerAvatar.style.width = `${radius}px`;
     });
 
     const { commonerLeftBorder, commonerTopBorder, commonerHeight, commonerSectionWidth } =
@@ -157,19 +169,29 @@ export default class GameDisplay {
 
     const commonerGamePosition = commonerPlayer.position;
 
+    // set width according to section width and get resulting height
     const commonerRadius = commonerSectionWidth;
+    commonerAvatar.style.width = `${commonerRadius}px`;
+    const commonerAvaterHeight = commonerAvatar.clientHeight;
+    console.log('commonerAvaterHeight', commonerAvaterHeight);
+
     const xPosition =
+      offsetLeft +
       commonerLeftBorder +
       commonerGamePosition * commonerSectionWidth -
       commonerSectionWidth / 2 -
       commonerRadius / 2;
-    const yPosition = commonerTopBorder + commonerHeight / 2;
+    const yPosition =
+      offsetTop + // canvas offset
+      commonerTopBorder + // commoner track within canvas offset
+      commonerHeight / 2 - // offset avatar to start halfway within section
+      commonerAvaterHeight / 2; // negative offset so avatar is centered within section
+    console.log('yPosition', yPosition);
 
     //commonerAvatar
     commonerAvatar.classList.remove('hidden');
     commonerAvatar.style.left = `${xPosition}px`;
     commonerAvatar.style.top = `${yPosition}px`;
-    commonerAvatar.style.width = `${commonerRadius}px`;
   }
 
   draw() {
