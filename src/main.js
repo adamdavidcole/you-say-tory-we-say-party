@@ -3,6 +3,7 @@ import { ROLES, GAME_STATES } from './constants';
 import CardDeck from './card-deck';
 import Player from './player';
 import GameDisplay from './game-display';
+import { showCard, hideCard } from './card-visibility';
 
 const gameState = {
   status: GAME_STATES.INITIALIZING,
@@ -33,24 +34,10 @@ function createPlayers(playerCount) {
   gameState.numPlayers = gameState.players.length;
 }
 
-function updateGameTurnUI({ card, currentPlayerTurnIndex } = {}) {
-  const currPlayer = gameState.players[currentPlayerTurnIndex];
+function updateGameTurnUI() {
   const nextPlayer = gameState.players[gameState.nextPlayerTurn];
 
-  const currentPlayerTextEl = document.getElementById('current-player-turn');
-  const currentTurnCardTextEl = document.getElementById('current-turn-card-text');
   const nextPlayerTurnEl = document.getElementById('next-player-turn');
-
-  const currentTurnCardPositionChangeTextEl = document.getElementById(
-    'current-turn-card-position-change-text'
-  );
-
-  if (card) {
-    currentPlayerTextEl.innerHTML = currPlayer.name;
-    currentTurnCardTextEl.innerHTML = card.text;
-    currentTurnCardPositionChangeTextEl.innerHTML = card.positionChangeText;
-  }
-
   nextPlayerTurnEl.innerText = nextPlayer.name;
 }
 
@@ -64,7 +51,6 @@ function updateGameOverStatus(player) {
 
 function startGame() {
   const initializeGameStateEl = document.getElementById('initialize-game-state');
-  const curentTurnStateEl = document.getElementById('current-turn-state');
   const nextTurnStateEl = document.getElementById('next-turn-state');
 
   const playerCountValue = document.querySelector(
@@ -77,8 +63,7 @@ function startGame() {
   gameState.status = GAME_STATES.PLAYING;
 
   initializeGameStateEl.remove();
-  curentTurnStateEl.style.display = 'block';
-  nextTurnStateEl.style.display = 'block';
+  nextTurnStateEl.style.display = 'flex';
 
   updateGameTurnUI();
 }
@@ -95,6 +80,8 @@ function nextTurn() {
 
   const cardDeck = getCardDeck(currPlayer.role);
   const card = cardDeck.drawCard();
+  showCard(card, currPlayer);
+
   currPlayer.updatePosition(card.positionChange);
   const hasPlayerWon = currPlayer.checkHasPlayerWon();
 
@@ -106,7 +93,7 @@ function nextTurn() {
     if (gameState.nextPlayerTurn === 0) gameState.currentRound += 1;
   }
 
-  updateGameTurnUI({ card, currentPlayerTurnIndex });
+  updateGameTurnUI();
 }
 
 const nextTurnButton = document.getElementById('next-turn-button');

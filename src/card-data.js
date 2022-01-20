@@ -52,7 +52,7 @@ const MpCards = [
     positionChange: -3,
   },
   {
-    text: 'Metropolitan Police decides not to open an investigation into possible breaches of covid-19 policy in spite of mounting evidence.',
+    text: 'Metropolitan Police decide not to open an investigation into possible breaches of covid-19 policy in spite of mounting evidence.',
     positionChangeText: 'Advance to next area.',
     positionChange: 5, // TODO: implement advance to next area
   },
