@@ -7,6 +7,13 @@ const commonerPlayerColor = '#000000';
 
 const margin = 20;
 
+const mpPlayerAvatars = [
+  document.getElementById('player-1-container'),
+  document.getElementById('player-2-container'),
+  document.getElementById('player-3-container'),
+];
+const commonerAvatar = document.getElementById('player-commoner-container');
+
 export default class GameDisplay {
   constructor(gameState) {
     const canvas = document.getElementById('gameDisplay');
@@ -130,17 +137,19 @@ export default class GameDisplay {
     const { leftBorder, topBorder, height, sectionWidth } = this.getMpTrackPosition();
     const radius = sectionWidth / 2;
 
-    mpPlayers.forEach(mpPlayer => {
+    mpPlayers.forEach((mpPlayer, i) => {
       const gamePosition = mpPlayer.position;
 
-      const xPosition = leftBorder + gamePosition * sectionWidth - sectionWidth / 2;
-      const yPosition = topBorder + (height / (mpPlayers.length + 1)) * (mpPlayer.index + 1);
+      console.log('topBorder', topBorder, 'height', height, 'radius', radius);
+      const xPosition = leftBorder + gamePosition * sectionWidth - sectionWidth / 2 - radius / 2;
+      const yPosition =
+        topBorder + ((height + 2 * radius) / (mpPlayers.length + 1)) * (mpPlayer.index + 1); // this will need to be tweaked based on game avatar sizes
 
-      const color = mpPlayerColors[mpPlayer.index];
-      this.ctx.fillStyle = color;
-      this.ctx.beginPath();
-      this.ctx.arc(xPosition, yPosition, radius, 0, 2 * Math.PI);
-      this.ctx.fill();
+      const mpPlayerAvatar = mpPlayerAvatars[i];
+      mpPlayerAvatar.classList.remove('hidden');
+      mpPlayerAvatar.style.left = `${xPosition}px`;
+      mpPlayerAvatar.style.top = `${yPosition}px`;
+      mpPlayerAvatar.style.width = `${radius}px`;
     });
 
     const { commonerLeftBorder, commonerTopBorder, commonerHeight, commonerSectionWidth } =
@@ -148,16 +157,19 @@ export default class GameDisplay {
 
     const commonerGamePosition = commonerPlayer.position;
 
+    const commonerRadius = commonerSectionWidth;
     const xPosition =
-      commonerLeftBorder + commonerGamePosition * commonerSectionWidth - commonerSectionWidth / 2;
+      commonerLeftBorder +
+      commonerGamePosition * commonerSectionWidth -
+      commonerSectionWidth / 2 -
+      commonerRadius / 2;
     const yPosition = commonerTopBorder + commonerHeight / 2;
 
-    const commonerRadius = commonerSectionWidth / 4;
-    const color = commonerPlayerColor;
-    this.ctx.fillStyle = color;
-    this.ctx.beginPath();
-    this.ctx.arc(xPosition, yPosition, commonerRadius, 0, 2 * Math.PI);
-    this.ctx.fill();
+    //commonerAvatar
+    commonerAvatar.classList.remove('hidden');
+    commonerAvatar.style.left = `${xPosition}px`;
+    commonerAvatar.style.top = `${yPosition}px`;
+    commonerAvatar.style.width = `${commonerRadius}px`;
   }
 
   draw() {

@@ -21,7 +21,6 @@ export function showCard(card, player, onCardClose) {
     cardContainerEl.classList.remove('hidden');
 
     const closeCardButton = document.getElementById('card-close-button');
-    console.log('closeCardButton', closeCardButton, onCardClose);
     closeCardButton.addEventListener('click', () => {
       hideCard();
       onCardClose();

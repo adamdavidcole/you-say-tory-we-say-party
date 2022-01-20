@@ -108,3 +108,21 @@ body {
   text-align: center;
   font-weight: 700;
 }
+
+/* PLAYERS */
+
+.player {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  transition: left 0.25s ease;
+}
+.player img {
+  height: 100%;
+  width: 100%;
+}
+
+.hidden {
+  display: none;
+}
