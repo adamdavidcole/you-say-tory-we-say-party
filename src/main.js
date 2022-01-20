@@ -33,38 +33,33 @@ function createPlayers(playerCount) {
   gameState.numPlayers = gameState.players.length;
 }
 
-function updateGameStateUI() {
-  const currentStatusEl = document.getElementById('current-status');
-  const currentRoundEl = document.getElementById('current-round');
-  const nextPlayerTurnEl = document.getElementById('next-player-turn');
-
-  const nextPlayer = gameState.players[gameState.nextPlayerTurn];
-
-  currentStatusEl.innerText = gameState.status;
-  currentRoundEl.innerText = gameState.currentRound;
-  nextPlayerTurnEl.innerText = nextPlayer.name;
-}
-
-function updateGameTurnUI({ card, currentPlayerTurnIndex }) {
+function updateGameTurnUI({ card, currentPlayerTurnIndex } = {}) {
   const currPlayer = gameState.players[currentPlayerTurnIndex];
+  const nextPlayer = gameState.players[gameState.nextPlayerTurn];
 
   const currentPlayerTextEl = document.getElementById('current-player-turn');
   const currentTurnCardTextEl = document.getElementById('current-turn-card-text');
+  const nextPlayerTurnEl = document.getElementById('next-player-turn');
+
   const currentTurnCardPositionChangeTextEl = document.getElementById(
     'current-turn-card-position-change-text'
   );
 
-  currentPlayerTextEl.innerHTML = currPlayer.name;
-  currentTurnCardTextEl.innerHTML = card.text;
-  currentTurnCardPositionChangeTextEl.innerHTML = card.positionChangeText;
+  if (card) {
+    currentPlayerTextEl.innerHTML = currPlayer.name;
+    currentTurnCardTextEl.innerHTML = card.text;
+    currentTurnCardPositionChangeTextEl.innerHTML = card.positionChangeText;
+  }
+
+  nextPlayerTurnEl.innerText = nextPlayer.name;
 }
 
-function updateGameOverStatus(player, playerIndex) {
+function updateGameOverStatus(player) {
   const nextTurnStateEl = document.getElementById('next-turn-state');
   const gameOverStateEl = document.getElementById('game-over-state');
 
   nextTurnStateEl.style.display = 'none';
-  gameOverStateEl.innerHTML = `<h3>Game Over</h3> ${player.name} the ${player.role} has won the game`;
+  gameOverStateEl.innerHTML = `<h3>Game Over</h3> ${player.name} the ${player.role} has won the game in ${gameState.currentRound} rounds`;
 }
 
 function startGame() {
@@ -81,11 +76,11 @@ function startGame() {
   createPlayers(playerCount);
   gameState.status = GAME_STATES.PLAYING;
 
-  updateGameStateUI();
-
   initializeGameStateEl.remove();
   curentTurnStateEl.style.display = 'block';
   nextTurnStateEl.style.display = 'block';
+
+  updateGameTurnUI();
 }
 
 const MpCardDeck = new CardDeck(ROLES.MP);
@@ -111,7 +106,6 @@ function nextTurn() {
     if (gameState.nextPlayerTurn === 0) gameState.currentRound += 1;
   }
 
-  updateGameStateUI();
   updateGameTurnUI({ card, currentPlayerTurnIndex });
 }
 
@@ -129,6 +123,3 @@ function draw() {
 }
 
 requestAnimationFrame(draw);
-
-createPlayers();
-updateGameStateUI();

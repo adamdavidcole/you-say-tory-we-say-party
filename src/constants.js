@@ -3,7 +3,7 @@ export const ROLES = {
   COMMONER: 'Commoner',
 };
 
-export const MAX_MP_POSITION = 20;
+export const MAX_MP_POSITION = 16;
 export const MAX_COMMONER_POSITION = 5;
 
 export const GAME_STATES = {

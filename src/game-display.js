@@ -15,6 +15,7 @@ export default class GameDisplay {
     this.canvas = canvas;
     this.ctx = ctx;
 
+    this.width = window.innerWidth;
     this.resetSize();
 
     window.addEventListener('resize', () => {
@@ -33,10 +34,14 @@ export default class GameDisplay {
   }
 
   resetSize() {
+    const { topBorder, width, height } = this.getMpTrackPosition();
+    const { commonerLeftBorder, commonerTopBorder, commonerHeight, commonerSectionWidth } =
+      this.getCommonerTrackPosition();
+    const totalHeight = commonerTopBorder + commonerHeight + margin;
+
     const windowWidth = window.innerWidth;
-    const windowHeight = window.innerHeight;
     this.canvas.width = windowWidth;
-    this.canvas.height = windowHeight;
+    this.canvas.height = totalHeight;
     this.width = this.canvas.width;
     this.height = this.canvas.height;
   }
@@ -45,7 +50,7 @@ export default class GameDisplay {
     const leftBorder = margin;
     const topBorder = margin;
     const width = this.width - 2 * margin;
-    const height = Math.min(this.height / 3, 200);
+    const height = Math.min(window.innerHeight / 3, 200);
     const sectionWidth = width / MAX_MP_POSITION;
 
     return {

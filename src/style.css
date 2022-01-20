@@ -3,7 +3,16 @@
 */
 
 body {
-  margin: 20px;
+  margin: 0px;
+}
+
+#game-header h1 {
+  margin: 10px 20px;
+}
+
+#game-header h4 {
+  margin: 0 20px;
+  font-weight: 500;
 }
 
 #current-game-state > div {
@@ -20,13 +29,12 @@ body {
 }
 
 #gameDetails {
-  position: relative;
-  top: 325px;
+  margin: 20px;
 }
 
 #gameDisplay {
-  position: absolute;
+  /* position: absolute;
   top: 0;
   left: 0;
-  z-index: -1;
+  z-index: -1; */
 }
