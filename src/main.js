@@ -76,6 +76,8 @@ function getCardDeck(role) {
 }
 
 function onCardClose() {
+  nextTurnButton.disabled = false;
+
   const currentPlayerTurnIndex = gameState.nextPlayerTurn;
   const currPlayer = gameState.players[currentPlayerTurnIndex];
 
@@ -103,6 +105,8 @@ function nextTurn() {
   showCard(card, currPlayer, onCardClose);
 
   gameState.lastCardDrawn = card;
+
+  nextTurnButton.disabled = true;
 }
 
 const nextTurnButton = document.getElementById('next-turn-button');
