@@ -17,6 +17,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #1f2034;
 }
 
 #game-container-wrapper {
@@ -42,7 +43,8 @@ body {
   right: 0;
   left: 0;
 
-  border: 1px solid black;
+  border-radius: 4px;
+  box-shadow: rgb(254 154 156 / 56%) 0px 8px 24px;
   overflow: hidden;
 
   background-color: #fe9a9c;
