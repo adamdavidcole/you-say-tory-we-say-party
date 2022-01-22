@@ -50,15 +50,9 @@ function updateGameOverStatus(player) {
   gameOverStateEl.innerHTML = `<h3>Game Over</h3> ${player.name} the ${player.role} has won the game in ${gameState.currentRound} rounds`;
 }
 
-function startGame() {
+function startGame(playerCount) {
   const initializeGameStateEl = document.getElementById('initialize-game-state');
   const nextTurnStateEl = document.getElementById('next-turn-state');
-
-  const playerCountValue = document.querySelector(
-    'input[name="select-player-count"]:checked'
-  ).value;
-
-  const playerCount = parseInt(playerCountValue, 10);
 
   createPlayers(playerCount);
   gameState.status = GAME_STATES.PLAYING;
@@ -112,8 +106,21 @@ function nextTurn() {
 const nextTurnButton = document.getElementById('next-turn-button');
 nextTurnButton.addEventListener('click', nextTurn);
 
-const startGameButton = document.getElementById('start-game-button');
-startGameButton.addEventListener('click', startGame);
+// const startGameButton = document.getElementById('start-game-button');
+// startGameButton.addEventListener('click', startGame);
+
+const startSinglePlayerGameBtn = document.getElementById('start-single-player-mode-btn');
+startSinglePlayerGameBtn.addEventListener('click', () => startGame(1));
+const multiPlayerGameBtn = document.getElementsByClassName('multi-player-mode-btn');
+for (let i = 0; i < multiPlayerGameBtn.length; i++) {
+  const btn = multiPlayerGameBtn[i];
+  btn.addEventListener('click', e => {
+    const playerCount = parseInt(e.target.getAttribute('data-player-count'));
+    startGame(playerCount);
+  });
+}
+
+//multi-player-mode-btn
 
 const gameDisplay = new GameDisplay(gameState);
 

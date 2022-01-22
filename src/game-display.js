@@ -54,10 +54,12 @@ export default class GameDisplay {
   }
 
   getMpTrackPosition() {
-    const leftBorder = margin;
-    const topBorder = margin;
-    const width = this.width - 2 * margin;
-    const height = Math.min(window.innerHeight / 3, 200);
+    const mpTrackMargin = 5 * margin;
+
+    const leftBorder = mpTrackMargin;
+    const topBorder = mpTrackMargin;
+    const width = this.width - 2 * mpTrackMargin;
+    const height = Math.min(window.innerHeight / 3, 100);
     const sectionWidth = width / MAX_MP_POSITION;
 
     return {
@@ -90,21 +92,21 @@ export default class GameDisplay {
     // MP border
     const { leftBorder, topBorder, width, height, sectionWidth } = this.getMpTrackPosition();
 
-    this.ctx.drawImage(mpTrackBackgroundImg, leftBorder, topBorder, width, height);
+    // this.ctx.drawImage(mpTrackBackgroundImg, leftBorder, topBorder, width, height);
 
-    this.ctx.beginPath();
-    this.ctx.rect(leftBorder, topBorder, width, height);
-    this.ctx.strokeStyle = '#FF0000';
-    this.ctx.stroke();
-    this.ctx.closePath();
+    // this.ctx.beginPath();
+    // this.ctx.rect(leftBorder, topBorder, width, height);
+    // this.ctx.strokeStyle = '#FF0000';
+    // this.ctx.stroke();
+    // this.ctx.closePath();
 
-    for (let i = 0; i < MAX_MP_POSITION; i += 1) {
-      const lineStartX = leftBorder + i * sectionWidth;
-      this.ctx.beginPath();
-      this.ctx.moveTo(lineStartX, topBorder);
-      this.ctx.lineTo(lineStartX, topBorder + height);
-      this.ctx.stroke();
-    }
+    // for (let i = 0; i < MAX_MP_POSITION; i += 1) {
+    //   const lineStartX = leftBorder + i * sectionWidth;
+    //   this.ctx.beginPath();
+    //   this.ctx.moveTo(lineStartX, topBorder);
+    //   this.ctx.lineTo(lineStartX, topBorder + height);
+    //   this.ctx.stroke();
+    // }
 
     // commoner Border
     const {

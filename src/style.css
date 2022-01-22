@@ -2,17 +2,48 @@
   ! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css 
 */
 
+* {
+  font-family: 'Press Start 2P', cursive;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
 body {
   margin: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#game-container {
+  width: 800px;
+  height: 600px;
+  border: 1px solid black;
+  overflow: hidden;
+
+  background-color: #fe9a9c;
 }
 
 #game-header h1 {
+  font-size: 40px;
   margin: 10px 20px;
+  color: #f4ce30;
+  -webkit-text-stroke: 1px black;
+  text-stroke: 1px black;
+}
+
+#game-header-title-line2 {
+  margin-left: 50px;
 }
 
 #game-header h4 {
-  margin: 0 20px;
+  margin: 20px;
   font-weight: 500;
+  line-height: 1.5;
 }
 
 #gameDetails {
@@ -22,8 +53,36 @@ body {
   align-items: center;
 }
 
+#initialize-game-state {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.select-player-count {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+  padding: 20px;
+  margin: 20px;
+}
+
+.select-player-count:first-child {
+  border-right: 5px solid black;
+}
+
 .select-number-of-players-radio-option {
   margin-right: 15px;
+}
+
+#start-single-player-mode-btn {
+  width: 150px;
+  font-size: 20px;
+  align-self: center;
+  justify-self: center;
 }
 
 #start-game-button,
@@ -125,4 +184,89 @@ body {
 
 .hidden {
   display: none;
+}
+
+/* Setting */
+#mp-track-background-container {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+  height: 300px;
+}
+
+#mp-track-background-container img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/** 
+ * BUTTONS
+ * source: https://codepen.io/MatthewShields/pen/pwrXpV?editors=1100
+**/
+.eightbit-btn {
+  background: #92cd41;
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  font-size: 30px;
+  padding: 20px;
+  font-family: 'Press Start 2P', cursive;
+  text-decoration: none;
+  color: white;
+  box-shadow: inset -4px -4px 0px 0px #4aa52e;
+}
+.eightbit-btn:hover,
+.eightbit-btn:focus {
+  background: #76c442;
+  box-shadow: inset -6px -6px 0px 0px #4aa52e;
+}
+.eightbit-btn:active {
+  box-shadow: inset 4px 4px 0px 0px #4aa52e;
+}
+.eightbit-btn:before,
+.eightbit-btn:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-sizing: content-box;
+}
+.eightbit-btn:before {
+  top: -6px;
+  left: 0;
+  border-top: 6px black solid;
+  border-bottom: 6px black solid;
+}
+.eightbit-btn:after {
+  left: -6px;
+  top: 0;
+  border-left: 6px black solid;
+  border-right: 6px black solid;
+}
+.eightbit-btn--reset {
+  background: #e76e55;
+  box-shadow: inset -4px -4px 0px 0px #8c2022;
+}
+.eightbit-btn--reset:hover,
+.eightbit-btn--reset:focus {
+  background: #ce372b;
+  box-shadow: inset -6px -6px 0px 0px #8c2022;
+}
+.eightbit-btn--reset:active {
+  box-shadow: inset 4px 4px 0px 0px #8c2022;
+}
+.eightbit-btn--proceed {
+  background: #f7d51d;
+  box-shadow: inset -4px -4px 0px 0px #e59400;
+}
+.eightbit-btn--proceed:hover,
+.eightbit-btn--proceed:focus {
+  background: #f2c409;
+  box-shadow: inset -6px -6px 0px 0px #e59400;
+}
+.eightbit-btn--proceed:active {
+  box-shadow: inset 4px 4px 0px 0px #e59400;
 }
