@@ -25,12 +25,10 @@ export default class GameDisplay {
     this.canvas = canvas;
     this.ctx = ctx;
 
-    this.width = canvas.width;
-    this.height = canvas.height;
-    // this.resetSize();
+    this.resetSize();
 
     window.addEventListener('resize', () => {
-      // this.onResize();
+      this.onResize();
     });
 
     this.gameState = gameState;
@@ -46,16 +44,15 @@ export default class GameDisplay {
   }
 
   resetSize() {
-    const { topBorder, width, height } = this.getMpTrackPosition();
-    const { commonerLeftBorder, commonerTopBorder, commonerHeight, commonerSectionWidth } =
-      this.getCommonerTrackPosition();
-    const totalHeight = commonerTopBorder + commonerHeight + margin;
+    const container = document.getElementById('game-container');
 
-    const windowWidth = window.innerWidth;
-    this.canvas.width = windowWidth;
-    this.canvas.height = totalHeight;
-    this.width = this.canvas.width;
-    this.height = this.canvas.height;
+    this.canvas.height = container.clientHeight;
+    this.canvas.width = container.clientWidth;
+
+    this.width = this.canvas.clientWidth;
+    this.height = this.canvas.clientHeight;
+
+    console.log('this.width', this.width, ' this.height ', this.height);
   }
 
   getMpTrackPosition() {
@@ -66,6 +63,8 @@ export default class GameDisplay {
     const width = this.width - 2 * margin;
     const height = heightUnit;
     const sectionWidth = width / MAX_MP_POSITION;
+
+    console.log('width', width, height);
 
     return {
       leftBorder,
@@ -103,6 +102,7 @@ export default class GameDisplay {
 
     this.ctx.beginPath();
     this.ctx.rect(leftBorder, topBorder, width, height);
+    console.log('rect', leftBorder, topBorder, width, height);
     this.ctx.strokeStyle = '#FF0000';
     this.ctx.stroke();
     this.ctx.closePath();
@@ -213,7 +213,7 @@ export default class GameDisplay {
 
   draw() {
     if (this.gameState.status === GAME_STATES.INITIALIZING) return;
-
+    console.log('this.wd/hg', this.width, this.height);
     this.ctx.clearRect(0, 0, this.width, this.height);
 
     this.drawSetting();

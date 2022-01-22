@@ -13,96 +13,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
-    <div id="game-container">
-      <div id="game-start-view">
-        <div id="game-header">
-          <div id="game-header-title">
-            <div id="game-header-title-line1"><h1>You Say Tory,</h1></div>
-            <div id="game-header-title-line2"><h1>We Say Party!</h1></div>
+    <div id="game-container-wrapper">
+      <div id="game-container">
+        <div id="game-start-view">
+          <div id="game-header">
+            <div id="game-header-title">
+              <div id="game-header-title-line1"><h1>You Say Tory,</h1></div>
+              <div id="game-header-title-line2"><h1>We Say Party!</h1></div>
+            </div>
+            <h4>A game where you’ll have so much fun, you’ll forget how ANGRY you are!</h4>
           </div>
-          <h4>A game where you’ll have so much fun, you’ll forget how ANGRY you are!</h4>
-        </div>
 
-        <div id="initialize-game-state">
-          <div class="select-player-count">
-            <h3>Single Player</h3>
-            <a id="start-single-player-mode-btn" href="javascript:void(0)" class="eightbit-btn"
-              >Begin</a
-            >
-          </div>
-          <div class="select-player-count">
-            <h3>Multi-Player</h3>
+          <div id="initialize-game-state">
+            <div class="select-player-count">
+              <h3>Single Player</h3>
+              <a id="start-single-player-mode-btn" href="javascript:void(0)" class="eightbit-btn"
+                >Begin</a
+              >
+            </div>
+            <div class="select-player-count">
+              <h3>Multi-Player</h3>
 
-            <p>Select number of players to begin:</p>
+              <p>Select number of players to begin:</p>
 
-            <div id="mulit-player-button-options">
-              <a
-                class="eightbit-btn multi-player-mode-btn"
-                href="javascript:void(0)"
-                class="eightbit-btn"
-                data-player-count="2"
-                >2</a
-              >
-              <a
-                class="eightbit-btn multi-player-mode-btn"
-                href="javascript:void(0)"
-                class="eightbit-btn"
-                data-player-count="3"
-                >3</a
-              >
-              <a
-                class="eightbit-btn multi-player-mode-btn"
-                href="javascript:void(0)"
-                class="eightbit-btn"
-                data-player-count="4"
-                >4</a
-              >
+              <div id="mulit-player-button-options">
+                <a
+                  class="eightbit-btn multi-player-mode-btn"
+                  href="javascript:void(0)"
+                  class="eightbit-btn"
+                  data-player-count="2"
+                  >2</a
+                >
+                <a
+                  class="eightbit-btn multi-player-mode-btn"
+                  href="javascript:void(0)"
+                  class="eightbit-btn"
+                  data-player-count="3"
+                  >3</a
+                >
+                <a
+                  class="eightbit-btn multi-player-mode-btn"
+                  href="javascript:void(0)"
+                  class="eightbit-btn"
+                  data-player-count="4"
+                  >4</a
+                >
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div id="background-images">
-        <img id="mp-track-background-img" class="hidden" src="../static/mp-track-background.png" />
-        <img
-          id="commoner-track-background-img"
-          class="hidden"
-          src="../static/commoner-track-background.png"
-        />
-        <div id="mp-track-background-container" class="hidden">
-          <img id="mp-track-background-img-2" src="../static/mp-track-background-2.png" />
-        </div>
-      </div>
-
-      <div id="characters-container">
-        <div id="player-1-container" class="player hidden">
-          <img src="../static/player-1.png" />
-        </div>
-        <div id="player-2-container" class="player hidden">
-          <img src="../static/player-2.png" />
-        </div>
-        <div id="player-3-container" class="player hidden">
-          <img src="../static/player-3.png" />
-        </div>
-        <div id="player-commoner-container" class="player hidden">
-          <img src="../static/player-commoner.png" />
-        </div>
-      </div>
-
-      <div id="gameDetails">
-        <div id="next-turn-state" style="display: none">
-          <div>
-            Next player turn <b><span id="next-player-turn"></span></b>
+        <div id="background-images">
+          <img
+            id="mp-track-background-img"
+            class="hidden"
+            src="../static/mp-track-background.png"
+          />
+          <img
+            id="commoner-track-background-img"
+            class="hidden"
+            src="../static/commoner-track-background.png"
+          />
+          <div id="mp-track-background-container" class="hidden">
+            <img id="mp-track-background-img-2" src="../static/mp-track-background-2.png" />
           </div>
-          <button id="next-turn-button">Go!</button>
         </div>
 
-        <div id="game-over-state"></div>
+        <div id="characters-container">
+          <div id="player-1-container" class="player hidden">
+            <img src="../static/player-1.png" />
+          </div>
+          <div id="player-2-container" class="player hidden">
+            <img src="../static/player-2.png" />
+          </div>
+          <div id="player-3-container" class="player hidden">
+            <img src="../static/player-3.png" />
+          </div>
+          <div id="player-commoner-container" class="player hidden">
+            <img src="../static/player-commoner.png" />
+          </div>
+        </div>
+
+        <div id="gameDetails">
+          <div id="next-turn-state" style="display: none">
+            <div>
+              Next player turn <b><span id="next-player-turn"></span></b>
+            </div>
+            <button id="next-turn-button">Go!</button>
+          </div>
+
+          <div id="game-over-state"></div>
+        </div>
+
+        <div id="card-container" class="hidden"></div>
+
+        <canvas id="gameDisplay" width="800" height="600"></canvas>
       </div>
-
-      <div id="card-container" class="hidden"></div>
-
-      <canvas id="gameDisplay" width="800" height="600"></canvas>
     </div>
 
     <script type="module" src="main.js"></script>

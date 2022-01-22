@@ -19,10 +19,29 @@ body {
   justify-content: center;
 }
 
-#game-container {
-  width: 800px;
-  height: 600px;
+#game-container-wrapper {
+  width: calc(100% - 30px);
+  max-width: 75%;
+  display: inline-block;
   position: relative;
+}
+#game-container-wrapper:after {
+  padding-top: 75%;
+  /* 16:9 ratio */
+  display: block;
+  content: '';
+}
+
+#game-container {
+  /* width: 800px;
+  height: 600px;
+  position: relative; */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+
   border: 1px solid black;
   overflow: hidden;
 
@@ -114,6 +133,8 @@ body {
   position: absolute;
   top: 0;
   left: 0;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 #card-container {
