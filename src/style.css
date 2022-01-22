@@ -22,18 +22,26 @@ body {
 #game-container {
   width: 800px;
   height: 600px;
+  position: relative;
   border: 1px solid black;
   overflow: hidden;
 
   background-color: #fe9a9c;
 }
 
+#game-header {
+  margin: 40px 20px;
+}
+
+#game-header-title {
+  margin-bottom: 40px;
+}
+
 #game-header h1 {
   font-size: 40px;
   margin: 10px 20px;
   color: #f4ce30;
-  -webkit-text-stroke: 1px black;
-  text-stroke: 1px black;
+  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 3px 0 #000, 1px 1px 0 #000;
 }
 
 #game-header-title-line2 {
@@ -43,14 +51,19 @@ body {
 #game-header h4 {
   margin: 20px;
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 1.8;
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  text-align: center;
 }
 
 #gameDetails {
-  margin: 20px;
+  height: 100%;
+  padding-bottom: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-end;
 }
 
 #initialize-game-state {
@@ -71,7 +84,7 @@ body {
 }
 
 .select-player-count:first-child {
-  border-right: 5px solid black;
+  border-right: 5px dashed black;
 }
 
 .select-number-of-players-radio-option {
@@ -91,16 +104,16 @@ body {
 }
 
 #next-turn-state {
+  margin-bottom: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 #gameDisplay {
-  /* position: absolute;
+  position: absolute;
   top: 0;
   left: 0;
-  z-index: -1; */
 }
 
 #card-container {
@@ -189,10 +202,9 @@ body {
 /* Setting */
 #mp-track-background-container {
   position: absolute;
-  top: 5px;
+  top: -46px;
   left: 0;
   width: 100%;
-  z-index: -1;
   height: 300px;
 }
 
@@ -269,4 +281,9 @@ body {
 }
 .eightbit-btn--proceed:active {
   box-shadow: inset 4px 4px 0px 0px #e59400;
+}
+
+.eightbit-btn,
+button {
+  z-index: 1; /* kind of a hack to access buttons above canvas, maybe fix another way... */
 }

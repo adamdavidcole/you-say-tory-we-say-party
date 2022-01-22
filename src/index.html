@@ -20,7 +20,7 @@
             <div id="game-header-title-line1"><h1>You Say Tory,</h1></div>
             <div id="game-header-title-line2"><h1>We Say Party!</h1></div>
           </div>
-          <h4>A game where you’ll have so much fun, you’ll forget how angry you are!</h4>
+          <h4>A game where you’ll have so much fun, you’ll forget how ANGRY you are!</h4>
         </div>
 
         <div id="initialize-game-state">
@@ -58,30 +58,22 @@
                 >4</a
               >
             </div>
-            <!-- 
-            <span class="select-number-of-players-radio-option">
-              <input type="radio" id="1" name="select-player-count" value="1" checked />
-              <label for="1">1</label>
-            </span>
-            <span class="select-number-of-players-radio-option">
-              <input type="radio" id="2" name="select-player-count" value="2" />
-              <label for="2">2</label>
-            </span>
-            <span class="select-number-of-players-radio-option">
-              <input type="radio" id="3" name="select-player-count" value="3" />
-              <label for="3">3</label>
-            </span>
-            <span class="select-number-of-players-radio-option">
-              <input type="radio" id="4" name="select-player-count" value="4" />
-              <label for="4">4</label>
-            </span> -->
-
-            <!-- <button id="start-game-button">Start game</button> -->
           </div>
         </div>
       </div>
 
-      <canvas id="gameDisplay" width="480" height="320" class="hidden"></canvas>
+      <div id="background-images">
+        <img id="mp-track-background-img" class="hidden" src="../static/mp-track-background.png" />
+        <img
+          id="commoner-track-background-img"
+          class="hidden"
+          src="../static/commoner-track-background.png"
+        />
+        <div id="mp-track-background-container" class="hidden">
+          <img id="mp-track-background-img-2" src="../static/mp-track-background-2.png" />
+        </div>
+      </div>
+
       <div id="characters-container">
         <div id="player-1-container" class="player hidden">
           <img src="../static/player-1.png" />
@@ -94,17 +86,6 @@
         </div>
         <div id="player-commoner-container" class="player hidden">
           <img src="../static/player-commoner.png" />
-        </div>
-      </div>
-      <div id="background-images">
-        <img id="mp-track-background-img" class="hidden" src="../static/mp-track-background.png" />
-        <img
-          id="commoner-track-background-img"
-          class="hidden"
-          src="../static/commoner-track-background.png"
-        />
-        <div id="mp-track-background-container">
-          <img id="mp-track-background-img-2" src="../static/mp-track-background-2.png" />
         </div>
       </div>
 
@@ -120,6 +101,8 @@
       </div>
 
       <div id="card-container" class="hidden"></div>
+
+      <canvas id="gameDisplay" width="800" height="600"></canvas>
     </div>
 
     <script type="module" src="main.js"></script>

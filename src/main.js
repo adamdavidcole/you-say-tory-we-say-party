@@ -51,7 +51,7 @@ function updateGameOverStatus(player) {
 }
 
 function startGame(playerCount) {
-  const initializeGameStateEl = document.getElementById('initialize-game-state');
+  const initializeGameStateEl = document.getElementById('game-start-view');
   const nextTurnStateEl = document.getElementById('next-turn-state');
 
   createPlayers(playerCount);
@@ -61,6 +61,7 @@ function startGame(playerCount) {
   nextTurnStateEl.style.display = 'flex';
 
   updateGameTurnUI();
+  gameDisplay.initializeGame();
 }
 
 const MpCardDeck = new CardDeck(ROLES.MP);

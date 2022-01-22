@@ -1,6 +1,6 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable arrow-parens */
-import { MAX_MP_POSITION, MAX_COMMONER_POSITION, ROLES } from './constants';
+import { MAX_MP_POSITION, MAX_COMMONER_POSITION, ROLES, GAME_STATES } from './constants';
 
 const mpPlayerColors = ['#FF0000', '#00FF00', '#0000FF'];
 const commonerPlayerColor = '#000000';
@@ -14,7 +14,7 @@ const mpPlayerAvatars = [
 ];
 const commonerAvatar = document.getElementById('player-commoner-container');
 
-const mpTrackBackgroundImg = document.getElementById('mp-track-background-img');
+const mpTrackBackgroundImgContainer = document.getElementById('mp-track-background-container');
 const commonerTrackBackgroundImg = document.getElementById('commoner-track-background-img');
 
 export default class GameDisplay {
@@ -25,11 +25,12 @@ export default class GameDisplay {
     this.canvas = canvas;
     this.ctx = ctx;
 
-    this.width = window.innerWidth;
-    this.resetSize();
+    this.width = canvas.width;
+    this.height = canvas.height;
+    // this.resetSize();
 
     window.addEventListener('resize', () => {
-      this.onResize();
+      // this.onResize();
     });
 
     this.gameState = gameState;
@@ -38,6 +39,10 @@ export default class GameDisplay {
   onResize() {
     this.resetSize();
     this.draw();
+  }
+
+  initializeGame() {
+    mpTrackBackgroundImgContainer.classList.remove('hidden');
   }
 
   resetSize() {
@@ -54,12 +59,12 @@ export default class GameDisplay {
   }
 
   getMpTrackPosition() {
-    const mpTrackMargin = 5 * margin;
+    const heightUnit = this.height / 8;
 
-    const leftBorder = mpTrackMargin;
-    const topBorder = mpTrackMargin;
-    const width = this.width - 2 * mpTrackMargin;
-    const height = Math.min(window.innerHeight / 3, 100);
+    const leftBorder = margin;
+    const topBorder = 2 * heightUnit;
+    const width = this.width - 2 * margin;
+    const height = heightUnit;
     const sectionWidth = width / MAX_MP_POSITION;
 
     return {
@@ -72,11 +77,13 @@ export default class GameDisplay {
   }
 
   getCommonerTrackPosition() {
+    const heightUnit = this.height / 8;
     const { topBorder, width, height } = this.getMpTrackPosition();
+
     const commonerLeftBorder = this.width / 2 - width / 5;
-    const commonerTopBorder = topBorder + height + 3 * margin;
+    const commonerTopBorder = topBorder + 3 * heightUnit;
     const commonerWidth = width / 2.5;
-    const commonerHeight = 100;
+    const commonerHeight = heightUnit;
     const commonerSectionWidth = commonerWidth / MAX_COMMONER_POSITION;
 
     return {
@@ -94,19 +101,19 @@ export default class GameDisplay {
 
     // this.ctx.drawImage(mpTrackBackgroundImg, leftBorder, topBorder, width, height);
 
-    // this.ctx.beginPath();
-    // this.ctx.rect(leftBorder, topBorder, width, height);
-    // this.ctx.strokeStyle = '#FF0000';
-    // this.ctx.stroke();
-    // this.ctx.closePath();
+    this.ctx.beginPath();
+    this.ctx.rect(leftBorder, topBorder, width, height);
+    this.ctx.strokeStyle = '#FF0000';
+    this.ctx.stroke();
+    this.ctx.closePath();
 
-    // for (let i = 0; i < MAX_MP_POSITION; i += 1) {
-    //   const lineStartX = leftBorder + i * sectionWidth;
-    //   this.ctx.beginPath();
-    //   this.ctx.moveTo(lineStartX, topBorder);
-    //   this.ctx.lineTo(lineStartX, topBorder + height);
-    //   this.ctx.stroke();
-    // }
+    for (let i = 0; i < MAX_MP_POSITION; i += 1) {
+      const lineStartX = leftBorder + i * sectionWidth;
+      this.ctx.beginPath();
+      this.ctx.moveTo(lineStartX, topBorder);
+      this.ctx.lineTo(lineStartX, topBorder + height);
+      this.ctx.stroke();
+    }
 
     // commoner Border
     const {
@@ -205,6 +212,8 @@ export default class GameDisplay {
   }
 
   draw() {
+    if (this.gameState.status === GAME_STATES.INITIALIZING) return;
+
     this.ctx.clearRect(0, 0, this.width, this.height);
 
     this.drawSetting();
