@@ -157,10 +157,13 @@ function onCardClose() {
 
   if (hasPlayerWon) {
     gameState.status = GAME_STATES.GAME_OVER;
-    updateGameOverStatus(currPlayer, currentPlayerTurnIndex);
 
-    pauseMpAudio();
-    playCommonerAudio();
+    setTimeout(() => {
+      updateGameOverStatus(currPlayer, currentPlayerTurnIndex);
+
+      pauseMpAudio();
+      playCommonerAudio();
+    }, 750); // delay so user can see player move across finish line
   } else {
     if (card.positionChange > 0) {
       playBeepUp1();
