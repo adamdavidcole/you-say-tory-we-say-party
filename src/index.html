@@ -98,22 +98,21 @@
         </div>
 
         <div id="gameDetails">
-          <div id="next-turn-state" style="display: none">
+          <div id="next-turn-state" class="hidden">
             <div>
               Next player turn <b><span id="next-player-turn"></span></b>
             </div>
             <button id="next-turn-button">Go!</button>
           </div>
-
-          <div id="game-over-state"></div>
         </div>
 
         <div id="card-container" class="hidden"></div>
 
         <div id="game-overlay-wrapper" class="hidden">
-          <div class="game-overlay" id="game-intro-screen" class="hidden">
+          <!-- GAME INTRO OVERLAY -->
+          <div class="game-overlay hidden" id="game-intro-screen">
             <h1>The race to partygate</h1>
-            <div id="game-overlay-content">
+            <div class="game-overlay-content">
               <p>
                 The world has gone into hiding, a deadly virus has caught every government by
                 surprise, Covid-19 is now pandemic. To prevent further unnecessary death and
@@ -140,6 +139,15 @@
             </div>
             <div id="game-intro-screen-btn" class="game-overlay-button">
               <a href="javascript:void(0)" class="eightbit-btn">Let's Go!</a>
+            </div>
+          </div>
+
+          <!-- GAME OVER OVERLAY -->
+          <div class="game-overlay hidden" id="game-over-screen">
+            <h1>Game Over</h1>
+            <div id="game-over-content" class="game-overlay-content"></div>
+            <div id="game-over-screen-btn" class="game-overlay-button">
+              <a href="javascript:void(0)" class="eightbit-btn">Play again</a>
             </div>
           </div>
         </div>

@@ -267,12 +267,17 @@ div {
 }
 
 .game-overlay {
+  width: 100%;
   margin: min(2vw, 4vh);
   padding: min(2vw, 4vh);
   background-color: antiquewhite;
   display: flex;
   flex-direction: column;
   border-radius: 5px;
+}
+
+.game-overlay-content {
+  flex-grow: 1;
 }
 
 .game-overlay-button {

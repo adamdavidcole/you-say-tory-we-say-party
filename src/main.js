@@ -14,14 +14,17 @@ import {
   playBeepDown1,
 } from './audio-player';
 
-const gameState = {
-  status: GAME_STATES.INITIALIZING,
-  numPlayers: 0,
-  currentRound: 0,
-  nextPlayerTurn: 0,
-  players: [],
-  lastCardDrawn: null,
-};
+const gameState = {};
+
+function setInitialGameState() {
+  gameState.status = GAME_STATES.INITIALIZING;
+  gameState.numPlayers = 0;
+  gameState.currentRound = 0;
+  gameState.nextPlayerTurn = 0;
+  gameState.players = [];
+  gameState.lastCardDrawn = null;
+}
+setInitialGameState();
 
 function createPlayers(playerCount) {
   gameState.players = [];
@@ -51,14 +54,6 @@ function updateGameTurnUI() {
   nextPlayerTurnEl.innerText = nextPlayer.name;
 }
 
-function updateGameOverStatus(player) {
-  const nextTurnStateEl = document.getElementById('next-turn-state');
-  const gameOverStateEl = document.getElementById('game-over-state');
-
-  nextTurnStateEl.style.display = 'none';
-  gameOverStateEl.innerHTML = `<h3>Game Over</h3> ${player.name} the ${player.role} has won the game in ${gameState.currentRound} rounds`;
-}
-
 function showGameIntroOverlay() {
   const gameOverleyEl = document.getElementById('game-overlay-wrapper');
   const gameIntroScreen = document.getElementById('game-intro-screen');
@@ -81,6 +76,51 @@ function hideGameIntroOverlay() {
   setTimeout(() => playMpAudio(), 250);
 }
 
+function showGameOverOverlay() {
+  const gameOverleyEl = document.getElementById('game-overlay-wrapper');
+  const gameOverScreen = document.getElementById('game-over-screen');
+
+  gameOverleyEl.classList.remove('hidden');
+  gameOverScreen.classList.remove('hidden');
+
+  setTimeout(() => playCommonerAudio(), 250);
+}
+
+function hideGameOverOverlay() {
+  const gameOverleyEl = document.getElementById('game-overlay-wrapper');
+  const gameOverScreen = document.getElementById('game-over-screen');
+
+  gameOverleyEl.classList.add('hidden');
+  gameOverScreen.classList.add('hidden');
+}
+
+function onGameOverBtnClick() {
+  const initializeGameStateEl = document.getElementById('game-start-view');
+  const nextTurnStateEl = document.getElementById('next-turn-state');
+
+  initializeGameStateEl.classList.remove('hidden');
+  nextTurnStateEl.classList.add('hidden');
+  gameDisplay.endGame();
+
+  hideGameOverOverlay();
+  playBeepUp2();
+  setInitialGameState();
+
+  // gameDisplay = new GameDisplay(gameState);
+}
+
+function updateGameOverStatus(player) {
+  const nextTurnStateEl = document.getElementById('next-turn-state');
+  const gameOverContentEl = document.getElementById('game-over-content');
+
+  nextTurnStateEl.classList.add('hidden');
+
+  const gameOverHtml = `<p>${player.name} the ${player.role} has won the game in ${gameState.currentRound} rounds</p>`;
+  gameOverContentEl.innerHTML = gameOverHtml;
+
+  showGameOverOverlay();
+}
+
 function startGame(playerCount) {
   const initializeGameStateEl = document.getElementById('game-start-view');
   const nextTurnStateEl = document.getElementById('next-turn-state');
@@ -88,8 +128,8 @@ function startGame(playerCount) {
   createPlayers(playerCount);
   gameState.status = GAME_STATES.PLAYING;
 
-  initializeGameStateEl.remove();
-  nextTurnStateEl.style.display = 'flex';
+  initializeGameStateEl.classList.add('hidden');
+  nextTurnStateEl.classList.remove('hidden');
 
   updateGameTurnUI();
   gameDisplay.initializeGame();
@@ -165,6 +205,9 @@ for (let i = 0; i < multiPlayerGameBtn.length; i++) {
 
 const gameIntroScreenBtn = document.getElementById('game-intro-screen-btn');
 gameIntroScreenBtn.addEventListener('click', hideGameIntroOverlay);
+
+const gameOverScreenBtn = document.getElementById('game-over-screen-btn');
+gameOverScreenBtn.addEventListener('click', onGameOverBtnClick);
 
 const gameDisplay = new GameDisplay(gameState);
 

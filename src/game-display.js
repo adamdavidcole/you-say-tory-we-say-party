@@ -43,6 +43,17 @@ export default class GameDisplay {
     mpTrackBackgroundImgContainer.classList.remove('hidden');
   }
 
+  endGame() {
+    mpTrackBackgroundImgContainer.classList.add('hidden');
+    mpPlayerAvatars.forEach(mpPlayerAvatar => {
+      mpPlayerAvatar.classList.add('hidden');
+    });
+    commonerAvatar.classList.add('hidden');
+    commonerTrackBackgroundImg.classList.add('hidden');
+
+    this.ctx.clearRect(0, 0, this.width, this.height);
+  }
+
   resetSize() {
     const container = document.getElementById('game-container');
 
@@ -214,7 +225,7 @@ export default class GameDisplay {
 
   draw() {
     if (this.gameState.status === GAME_STATES.INITIALIZING) return;
-    console.log('this.wd/hg', this.width, this.height);
+
     this.ctx.clearRect(0, 0, this.width, this.height);
 
     this.drawSetting();
