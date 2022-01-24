@@ -242,6 +242,8 @@ div {
   left: 0;
   width: 100%;
   height: 38%;
+
+  border-bottom: min(1vw, 2vh) solid black;
 }
 
 #mp-track-background-container img {

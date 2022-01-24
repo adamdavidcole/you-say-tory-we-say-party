@@ -5,7 +5,7 @@ import { MAX_MP_POSITION, MAX_COMMONER_POSITION, ROLES, GAME_STATES } from './co
 const mpPlayerColors = ['#FF0000', '#00FF00', '#0000FF'];
 const commonerPlayerColor = '#000000';
 
-const margin = 20;
+const margin = window.innerWidth * 0.015;
 
 const mpPlayerAvatars = [
   document.getElementById('player-1-container'),
@@ -58,9 +58,9 @@ export default class GameDisplay {
   getMpTrackPosition() {
     const heightUnit = this.height / 8;
 
-    const leftBorder = margin;
+    const leftBorder = this.width / 15;
     const topBorder = 2 * heightUnit;
-    const width = this.width - 2 * margin;
+    const width = this.width - 2 * leftBorder;
     const height = heightUnit;
     const sectionWidth = width / MAX_MP_POSITION;
 
@@ -100,20 +100,20 @@ export default class GameDisplay {
 
     // this.ctx.drawImage(mpTrackBackgroundImg, leftBorder, topBorder, width, height);
 
-    this.ctx.beginPath();
-    this.ctx.rect(leftBorder, topBorder, width, height);
-    console.log('rect', leftBorder, topBorder, width, height);
-    this.ctx.strokeStyle = '#FF0000';
-    this.ctx.stroke();
-    this.ctx.closePath();
+    // this.ctx.beginPath();
+    // this.ctx.rect(leftBorder, topBorder, width, height);
+    // console.log('rect', leftBorder, topBorder, width, height);
+    // this.ctx.strokeStyle = '#FF0000';
+    // this.ctx.stroke();
+    // this.ctx.closePath();
 
-    for (let i = 0; i < MAX_MP_POSITION; i += 1) {
-      const lineStartX = leftBorder + i * sectionWidth;
-      this.ctx.beginPath();
-      this.ctx.moveTo(lineStartX, topBorder);
-      this.ctx.lineTo(lineStartX, topBorder + height);
-      this.ctx.stroke();
-    }
+    // for (let i = 0; i < MAX_MP_POSITION; i += 1) {
+    //   const lineStartX = leftBorder + i * sectionWidth;
+    //   this.ctx.beginPath();
+    //   this.ctx.moveTo(lineStartX, topBorder);
+    //   this.ctx.lineTo(lineStartX, topBorder + height);
+    //   this.ctx.stroke();
+    // }
 
     // commoner Border
     const {
@@ -156,7 +156,7 @@ export default class GameDisplay {
     if (mpPlayers.length === 0 || !commonerPlayer) return;
 
     const { leftBorder, topBorder, height, sectionWidth } = this.getMpTrackPosition();
-    const radius = sectionWidth / 2;
+    const radius = sectionWidth * 1.2;
 
     mpPlayers.forEach((mpPlayer, i) => {
       const mpPlayerAvatar = mpPlayerAvatars[i];
@@ -176,7 +176,8 @@ export default class GameDisplay {
         offsetTop + // canvas offset
         topBorder + // mp track offset
         (height / (mpPlayers.length + 1)) * (mpPlayer.index + 1) - // height offset within section based on how many players there are
-        mpPlayerAvaterHeight / 2; // negative offset to center avater within height bounding box
+        mpPlayerAvaterHeight + // negative offset to center avater within height bounding box
+        this.height / 40; // slight shift down
 
       mpPlayerAvatar.classList.remove('hidden');
       mpPlayerAvatar.style.left = `${xPosition}px`;
