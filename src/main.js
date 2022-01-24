@@ -4,6 +4,15 @@ import CardDeck from './card-deck';
 import Player from './player';
 import GameDisplay from './game-display';
 import { showCard, hideCard } from './card-visibility';
+import {
+  playCommonerAudio,
+  pauseCommonerAudio,
+  playMpAudio,
+  pauseMpAudio,
+  playBeepUp1,
+  playBeepUp2,
+  playBeepDown1,
+} from './audio-player';
 
 const gameState = {
   status: GAME_STATES.INITIALIZING,
@@ -62,6 +71,9 @@ function startGame(playerCount) {
 
   updateGameTurnUI();
   gameDisplay.initializeGame();
+
+  playBeepUp2();
+  setTimeout(() => playMpAudio(), 250);
 }
 
 const MpCardDeck = new CardDeck(ROLES.MP);
@@ -83,7 +95,16 @@ function onCardClose() {
   if (hasPlayerWon) {
     gameState.status = GAME_STATES.GAME_OVER;
     updateGameOverStatus(currPlayer, currentPlayerTurnIndex);
+
+    pauseMpAudio();
+    playCommonerAudio();
   } else {
+    if (card.positionChange > 0) {
+      playBeepUp1();
+    } else {
+      playBeepDown1();
+    }
+
     gameState.nextPlayerTurn = (gameState.nextPlayerTurn + 1) % gameState.numPlayers;
     if (gameState.nextPlayerTurn === 0) gameState.currentRound += 1;
   }
@@ -98,6 +119,7 @@ function nextTurn() {
   const cardDeck = getCardDeck(currPlayer.role);
   const card = cardDeck.drawCard();
   showCard(card, currPlayer, onCardClose);
+  playBeepUp2();
 
   gameState.lastCardDrawn = card;
 
