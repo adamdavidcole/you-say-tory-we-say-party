@@ -59,6 +59,28 @@ function updateGameOverStatus(player) {
   gameOverStateEl.innerHTML = `<h3>Game Over</h3> ${player.name} the ${player.role} has won the game in ${gameState.currentRound} rounds`;
 }
 
+function showGameIntroOverlay() {
+  const gameOverleyEl = document.getElementById('game-overlay-wrapper');
+  const gameIntroScreen = document.getElementById('game-intro-screen');
+
+  gameOverleyEl.classList.remove('hidden');
+  gameIntroScreen.classList.remove('hidden');
+
+  setTimeout(() => playCommonerAudio(), 250);
+}
+
+function hideGameIntroOverlay() {
+  const gameOverleyEl = document.getElementById('game-overlay-wrapper');
+  const gameIntroScreen = document.getElementById('game-intro-screen');
+
+  gameOverleyEl.classList.add('hidden');
+  gameIntroScreen.classList.add('hidden');
+
+  pauseCommonerAudio();
+  playBeepUp2();
+  setTimeout(() => playMpAudio(), 250);
+}
+
 function startGame(playerCount) {
   const initializeGameStateEl = document.getElementById('game-start-view');
   const nextTurnStateEl = document.getElementById('next-turn-state');
@@ -73,7 +95,8 @@ function startGame(playerCount) {
   gameDisplay.initializeGame();
 
   playBeepUp2();
-  setTimeout(() => playMpAudio(), 250);
+
+  showGameIntroOverlay();
 }
 
 const MpCardDeck = new CardDeck(ROLES.MP);
@@ -129,9 +152,6 @@ function nextTurn() {
 const nextTurnButton = document.getElementById('next-turn-button');
 nextTurnButton.addEventListener('click', nextTurn);
 
-// const startGameButton = document.getElementById('start-game-button');
-// startGameButton.addEventListener('click', startGame);
-
 const startSinglePlayerGameBtn = document.getElementById('start-single-player-mode-btn');
 startSinglePlayerGameBtn.addEventListener('click', () => startGame(1));
 const multiPlayerGameBtn = document.getElementsByClassName('multi-player-mode-btn');
@@ -143,7 +163,8 @@ for (let i = 0; i < multiPlayerGameBtn.length; i++) {
   });
 }
 
-//multi-player-mode-btn
+const gameIntroScreenBtn = document.getElementById('game-intro-screen-btn');
+gameIntroScreenBtn.addEventListener('click', hideGameIntroOverlay);
 
 const gameDisplay = new GameDisplay(gameState);
 

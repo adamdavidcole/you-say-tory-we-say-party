@@ -12,6 +12,7 @@ export function playCommonerAudio() {
 
 export function pauseCommonerAudio() {
   commonerAudio.pause();
+  commonerAudio.currentTime = 0;
 }
 
 export function playMpAudio() {
@@ -21,6 +22,7 @@ export function playMpAudio() {
 
 export function pauseMpAudio() {
   mpAudio.pause();
+  mpAudio.currentTime = 0;
 }
 
 export function playBeepUp1() {
