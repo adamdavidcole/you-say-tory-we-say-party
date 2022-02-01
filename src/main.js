@@ -217,6 +217,9 @@ const gameDisplay = new GameDisplay(gameState);
 function draw() {
   gameDisplay.draw();
   requestAnimationFrame(draw);
+
+  // This hides the address bar
+  window.scrollTo(0, 2);
 }
 
 requestAnimationFrame(draw);

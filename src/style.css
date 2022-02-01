@@ -6,7 +6,11 @@
   font-family: 'Press Start 2P', cursive;
 }
 
-html,
+html {
+  height: calc(100% + 2px);
+  width: 100%;
+}
+
 body {
   height: 100%;
   width: 100%;
@@ -241,14 +245,31 @@ div {
   top: 0;
   left: 0;
   width: 100%;
-  height: 38%;
+  height: 50%;
 
   border-bottom: min(1vw, vh) solid black;
+}
+
+#commoner-track-background-container {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 28%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #mp-track-background-container img {
   position: relative;
   width: 100%;
+  height: 100%;
+}
+
+#commoner-track-background-container img {
+  position: relative;
+  width: 75%;
   height: 100%;
 }
 

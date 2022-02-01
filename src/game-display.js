@@ -15,6 +15,9 @@ const mpPlayerAvatars = [
 const commonerAvatar = document.getElementById('player-commoner-container');
 
 const mpTrackBackgroundImgContainer = document.getElementById('mp-track-background-container');
+const commonerTrackBackgroundContainer = document.getElementById(
+  'commoner-track-background-container'
+);
 const commonerTrackBackgroundImg = document.getElementById('commoner-track-background-img');
 
 export default class GameDisplay {
@@ -32,6 +35,8 @@ export default class GameDisplay {
     });
 
     this.gameState = gameState;
+
+    this.drawTrack = false;
   }
 
   onResize() {
@@ -41,15 +46,17 @@ export default class GameDisplay {
 
   initializeGame() {
     mpTrackBackgroundImgContainer.classList.remove('hidden');
+    commonerTrackBackgroundContainer.classList.remove('hidden');
   }
 
   endGame() {
     mpTrackBackgroundImgContainer.classList.add('hidden');
+    commonerTrackBackgroundContainer.classList.add('hidden');
+
     mpPlayerAvatars.forEach(mpPlayerAvatar => {
       mpPlayerAvatar.classList.add('hidden');
     });
     commonerAvatar.classList.add('hidden');
-    commonerTrackBackgroundImg.classList.add('hidden');
 
     this.ctx.clearRect(0, 0, this.width, this.height);
   }
@@ -69,8 +76,8 @@ export default class GameDisplay {
   getMpTrackPosition() {
     const heightUnit = this.height / 8;
 
-    const leftBorder = this.width / 15;
-    const topBorder = 2 * heightUnit;
+    const leftBorder = this.width / 50;
+    const topBorder = 3 * heightUnit;
     const width = this.width - 2 * leftBorder;
     const height = heightUnit;
     const sectionWidth = width / MAX_MP_POSITION;
@@ -90,9 +97,9 @@ export default class GameDisplay {
     const heightUnit = this.height / 8;
     const { topBorder, width, height } = this.getMpTrackPosition();
 
-    const commonerLeftBorder = this.width / 2 - width / 5;
-    const commonerTopBorder = topBorder + 3 * heightUnit;
-    const commonerWidth = width / 2.5;
+    const commonerLeftBorder = this.width / 2 - width / 8;
+    const commonerTopBorder = topBorder + 2 * heightUnit;
+    const commonerWidth = width / 4;
     const commonerHeight = heightUnit;
     const commonerSectionWidth = commonerWidth / MAX_COMMONER_POSITION;
 
@@ -111,20 +118,22 @@ export default class GameDisplay {
 
     // this.ctx.drawImage(mpTrackBackgroundImg, leftBorder, topBorder, width, height);
 
-    // this.ctx.beginPath();
-    // this.ctx.rect(leftBorder, topBorder, width, height);
-    // console.log('rect', leftBorder, topBorder, width, height);
-    // this.ctx.strokeStyle = '#FF0000';
-    // this.ctx.stroke();
-    // this.ctx.closePath();
+    if (this.drawTrack) {
+      this.ctx.beginPath();
+      this.ctx.rect(leftBorder, topBorder, width, height);
+      console.log('rect', leftBorder, topBorder, width, height);
+      this.ctx.strokeStyle = '#FF0000';
+      this.ctx.stroke();
+      this.ctx.closePath();
 
-    // for (let i = 0; i < MAX_MP_POSITION; i += 1) {
-    //   const lineStartX = leftBorder + i * sectionWidth;
-    //   this.ctx.beginPath();
-    //   this.ctx.moveTo(lineStartX, topBorder);
-    //   this.ctx.lineTo(lineStartX, topBorder + height);
-    //   this.ctx.stroke();
-    // }
+      for (let i = 0; i < MAX_MP_POSITION; i += 1) {
+        const lineStartX = leftBorder + i * sectionWidth;
+        this.ctx.beginPath();
+        this.ctx.moveTo(lineStartX, topBorder);
+        this.ctx.lineTo(lineStartX, topBorder + height);
+        this.ctx.stroke();
+      }
+    }
 
     // commoner Border
     const {
@@ -135,26 +144,28 @@ export default class GameDisplay {
       commonerSectionWidth,
     } = this.getCommonerTrackPosition();
 
-    this.ctx.drawImage(
-      commonerTrackBackgroundImg,
-      leftBorder,
-      commonerTopBorder - height / 4,
-      width,
-      height
-    );
+    // this.ctx.drawImage(
+    //   commonerTrackBackgroundImg,
+    //   leftBorder,
+    //   commonerTopBorder - height / 4,
+    //   width,
+    //   height
+    // );
 
-    this.ctx.beginPath();
-    this.ctx.rect(commonerLeftBorder, commonerTopBorder, commonerWidth, commonerHeight);
-    this.ctx.strokeStyle = '#FF0000';
-    this.ctx.stroke();
-    this.ctx.closePath();
-
-    for (let i = 0; i < MAX_COMMONER_POSITION; i += 1) {
-      const lineStartX = commonerLeftBorder + i * commonerSectionWidth;
+    if (this.drawTrack) {
       this.ctx.beginPath();
-      this.ctx.moveTo(lineStartX, commonerTopBorder);
-      this.ctx.lineTo(lineStartX, commonerTopBorder + commonerHeight);
+      this.ctx.rect(commonerLeftBorder, commonerTopBorder, commonerWidth, commonerHeight);
+      this.ctx.strokeStyle = '#FF0000';
       this.ctx.stroke();
+      this.ctx.closePath();
+
+      for (let i = 0; i < MAX_COMMONER_POSITION; i += 1) {
+        const lineStartX = commonerLeftBorder + i * commonerSectionWidth;
+        this.ctx.beginPath();
+        this.ctx.moveTo(lineStartX, commonerTopBorder);
+        this.ctx.lineTo(lineStartX, commonerTopBorder + commonerHeight);
+        this.ctx.stroke();
+      }
     }
   }
 
