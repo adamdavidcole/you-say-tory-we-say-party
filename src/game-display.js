@@ -82,8 +82,6 @@ export default class GameDisplay {
     const height = heightUnit;
     const sectionWidth = width / MAX_MP_POSITION;
 
-    console.log('width', width, height);
-
     return {
       leftBorder,
       topBorder,
@@ -121,7 +119,6 @@ export default class GameDisplay {
     if (this.drawTrack) {
       this.ctx.beginPath();
       this.ctx.rect(leftBorder, topBorder, width, height);
-      console.log('rect', leftBorder, topBorder, width, height);
       this.ctx.strokeStyle = '#FF0000';
       this.ctx.stroke();
       this.ctx.closePath();

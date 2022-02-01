@@ -293,10 +293,13 @@ div {
   display: flex;
   flex-direction: column;
   border-radius: 5px;
+  align-items: center;
 }
 
 .game-overlay-content {
+  max-width: 500px;
   flex-grow: 1;
+  line-height: 1.5;
 }
 
 .game-overlay-button {

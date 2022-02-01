@@ -23,8 +23,13 @@ function setInitialGameState() {
   gameState.nextPlayerTurn = 0;
   gameState.players = [];
   gameState.lastCardDrawn = null;
+  gameState.isSinglePlayer = false;
 }
 setInitialGameState();
+
+function isSinglePlayer() {
+  return !!gameState.isSinglePlayer;
+}
 
 function createPlayers(playerCount) {
   gameState.players = [];
@@ -57,9 +62,17 @@ function updateGameTurnUI() {
 function showGameIntroOverlay() {
   const gameOverleyEl = document.getElementById('game-overlay-wrapper');
   const gameIntroScreen = document.getElementById('game-intro-screen');
+  const singlePlayerIntroContent = document.getElementById('game-overlay-content-single');
+  const multiPlayerIntroContent = document.getElementById('game-overlay-content-multi');
 
   gameOverleyEl.classList.remove('hidden');
   gameIntroScreen.classList.remove('hidden');
+
+  if (isSinglePlayer()) {
+    singlePlayerIntroContent.classList.remove('hidden');
+  } else {
+    multiPlayerIntroContent.classList.remove('hidden');
+  }
 
   setTimeout(() => playCommonerAudio(), 250);
 }
@@ -67,9 +80,17 @@ function showGameIntroOverlay() {
 function hideGameIntroOverlay() {
   const gameOverleyEl = document.getElementById('game-overlay-wrapper');
   const gameIntroScreen = document.getElementById('game-intro-screen');
+  const singlePlayerIntroContent = document.getElementById('game-overlay-content-single');
+  const multiPlayerIntroContent = document.getElementById('game-overlay-content-multi');
 
   gameOverleyEl.classList.add('hidden');
   gameIntroScreen.classList.add('hidden');
+
+  if (isSinglePlayer()) {
+    singlePlayerIntroContent.classList.add('hidden');
+  } else {
+    multiPlayerIntroContent.classList.add('hidden');
+  }
 
   pauseCommonerAudio();
   playBeepUp2();
@@ -127,6 +148,7 @@ function startGame(playerCount) {
 
   createPlayers(playerCount);
   gameState.status = GAME_STATES.PLAYING;
+  gameState.isSinglePlayer = playerCount === 1;
 
   initializeGameStateEl.classList.add('hidden');
   nextTurnStateEl.classList.remove('hidden');
