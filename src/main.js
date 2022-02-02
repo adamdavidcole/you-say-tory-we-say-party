@@ -196,17 +196,17 @@ function startGame(playerCount) {
   showGameIntroOverlay();
 }
 
+/**
+ * CARD DECKS
+ */
+const CommonerCardDeck = new CardDeck(ROLES.COMMONER);
 let MpCardDeck = new CardDeck(ROLES.MP);
 for (let i = 0; i < 5; i += 1) {
   // ensure we start with positive move for MP
   const card = MpCardDeck.peekCard();
   if (card.positionChange > 0) break;
   MpCardDeck = new CardDeck(ROLES.MP);
-  console.log('check again');
 }
-
-const CommonerCardDeck = new CardDeck(ROLES.COMMONER);
-
 function getCardDeck(role) {
   return role === ROLES.MP ? MpCardDeck : CommonerCardDeck;
 }
