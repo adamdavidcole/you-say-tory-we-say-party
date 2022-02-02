@@ -36,8 +36,8 @@ function createPlayers(playerCount) {
 
   if (playerCount === 1) {
     // if one person is playing, set second player as computer
-    const playerA = new Player({ role: ROLES.MP, index: 0, isComputer: false });
-    const playerB = new Player({ role: ROLES.COMMONER, index: 1, isComputer: true });
+    const playerA = new Player({ role: ROLES.MP, index: 0, isComputer: true });
+    const playerB = new Player({ role: ROLES.COMMONER, index: 1, isComputer: false });
     gameState.players.push(playerA, playerB);
   } else {
     // if two to four people are playing, no player is a computer and there is one Commoner
@@ -52,11 +52,38 @@ function createPlayers(playerCount) {
   gameState.numPlayers = gameState.players.length;
 }
 
+// function showComputerTurnUI() {}
+
 function updateGameTurnUI() {
   const nextPlayer = gameState.players[gameState.nextPlayerTurn];
+  const nextTurnButton = document.getElementById('next-turn-button');
+  const nextPlayerTurnDetailsEl = document.getElementById('next-turn-state-details');
 
-  const nextPlayerTurnEl = document.getElementById('next-player-turn');
-  nextPlayerTurnEl.innerText = nextPlayer.name;
+  if (isSinglePlayer()) {
+    if (nextPlayer.isComputer) {
+      nextTurnButton.classList.add('hidden');
+
+      let ellipseCount = 0;
+      let messageContent = 'Boris is drawing a card';
+      nextPlayerTurnDetailsEl.innerHTML = messageContent;
+      const ellipseInterval = setInterval(() => {
+        if (ellipseCount === 3) {
+          clearInterval(ellipseInterval);
+          nextTurn();
+          return;
+        }
+
+        messageContent += '.';
+        ellipseCount += 1;
+        nextPlayerTurnDetailsEl.innerHTML = messageContent;
+      }, 500);
+    } else {
+      nextTurnButton.classList.remove('hidden');
+      nextPlayerTurnDetailsEl.innerHTML = 'Your turn! Click to draw card...';
+    }
+  } else {
+    nextPlayerTurnDetailsEl.innerHTML = `Next player turn <b><span id="next-player-turn">${nextPlayer.name}</span></b>`;
+  }
 }
 
 function showGameIntroOverlay() {
@@ -91,6 +118,8 @@ function hideGameIntroOverlay() {
   } else {
     multiPlayerIntroContent.classList.add('hidden');
   }
+
+  updateGameTurnUI();
 
   pauseCommonerAudio();
   playBeepUp2();
@@ -153,7 +182,7 @@ function startGame(playerCount) {
   initializeGameStateEl.classList.add('hidden');
   nextTurnStateEl.classList.remove('hidden');
 
-  updateGameTurnUI();
+  // updateGameTurnUI();
   gameDisplay.initializeGame();
 
   playBeepUp2();

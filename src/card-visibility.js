@@ -13,19 +13,21 @@ const cardTemplate = (card, player) => `
 </div>`;
 
 export function showCard(card, player, onCardClose) {
+  cardContainerEl.classList.remove('hidden');
+
   cardIsVisible = true;
 
   cardContainerEl.innerHTML = cardTemplate(card, player);
 
   setTimeout(() => {
-    cardContainerEl.classList.remove('hidden');
+    cardContainerEl.classList.remove('out-of-view');
 
     const closeCardButton = document.getElementById('card-close-button');
     closeCardButton.addEventListener('click', () => {
       hideCard();
       onCardClose();
     });
-  }, 0);
+  }, 3);
 }
 
 export function hideCard() {
@@ -37,6 +39,7 @@ export function hideCard() {
   setTimeout(() => {
     cardEl.remove();
     cardContainerEl.classList.add('hidden');
+    cardContainerEl.classList.add('out-of-view');
   }, 150);
 }
 

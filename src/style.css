@@ -197,7 +197,7 @@ div {
   transition: top 0.25s ease-out, opacity 0.15s ease-out;
 }
 
-#card-container.hidden #card {
+#card-container.out-of-view #card {
   top: calc(50% + 100px);
 }
 #card.closed {
