@@ -109,9 +109,9 @@ const MpCards = [
   },
   {
     text: 'Admit to attending “an event” with drinks at Downing Street over lockdown, but claim you didn’t know it was a party.',
-    positionChangeText: 'Miss next turn',
+    positionChangeText: 'Do not move any steps.',
     computerPositionChangeText: 'He misses next turn.',
-    positionChange: 0, // TODO: implement skip turn
+    positionChange: 0,
     source: 'https://www.bbc.co.uk/news/uk-politics-59969631',
   },
   {
@@ -233,7 +233,7 @@ const CommonerCards = [
     positionChange: 0,
   },
   {
-    text: 'You did something great today.',
+    text: 'Today you woke up without a crushing sense of dread.',
     positionChangeText: 'Move forward 1 step.',
     positionChange: 1,
   },
