@@ -167,15 +167,20 @@ div {
   justify-content: center;
   overflow: hidden;
   z-index: 1;
+  background-color: rgba(0, 0, 0, 0.7);
 
   opacity: 1;
-  transition: opacity 0.15s ease-out;
+  transition: opacity 0.15s ease-out, background-color 0.15s ease-out;
+}
+#card-container.out-of-view {
+  background-color: rgba(0, 0, 0, 0.7);
 }
 #card-container.hidden {
   z-index: -1;
 }
 #card-container.closed {
   opacity: 0;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 #card {
@@ -199,6 +204,7 @@ div {
 
 #card-container.out-of-view #card {
   top: calc(50% + 100px);
+  background-color: rgba(0, 0, 0, 0);
 }
 #card.closed {
   opacity: 0;
@@ -283,6 +289,7 @@ div {
   height: 100%;
   width: 100%;
   display: flex;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .game-overlay {

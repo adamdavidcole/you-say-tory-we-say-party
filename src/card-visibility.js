@@ -46,13 +46,15 @@ export function hideCard() {
   cardIsVisible = false;
 
   const cardEl = document.getElementById('card');
+  cardContainerEl.classList.add('closed');
   cardEl.classList.add('closed');
 
   setTimeout(() => {
     cardEl.remove();
+    cardContainerEl.classList.remove('closed');
     cardContainerEl.classList.add('hidden');
     cardContainerEl.classList.add('out-of-view');
-  }, 150);
+  }, 1000);
 }
 
 export function isCardVisible() {
