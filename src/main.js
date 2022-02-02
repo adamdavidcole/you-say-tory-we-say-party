@@ -24,6 +24,7 @@ function setInitialGameState() {
   gameState.players = [];
   gameState.lastCardDrawn = null;
   gameState.isSinglePlayer = false;
+  gameState.commonerSpriteSrc = '';
 }
 setInitialGameState();
 
@@ -50,6 +51,11 @@ function createPlayers(playerCount) {
   }
 
   gameState.numPlayers = gameState.players.length;
+}
+
+function setPlayerSkinTone() {
+  const playerSpriteEl = document.getElementById('player-commoner-img');
+  playerSpriteEl.src = gameState.commonerSpriteSrc;
 }
 
 // function showComputerTurnUI() {}
@@ -277,6 +283,18 @@ for (let i = 0; i < multiPlayerGameBtn.length; i++) {
   btn.addEventListener('click', e => {
     const playerCount = parseInt(e.target.getAttribute('data-player-count'));
     startGame(playerCount);
+  });
+}
+
+const selectPlayerSpriteBtns = document.getElementsByClassName('select-commoner-player-sprite');
+for (let i = 0; i < selectPlayerSpriteBtns.length; i++) {
+  const btn = selectPlayerSpriteBtns[i];
+  btn.addEventListener('click', e => {
+    // get sprite source and use it to set primary game character sprite
+    gameState.commonerSpriteSrc = e.target.firstElementChild.src;
+    setPlayerSkinTone();
+
+    hideGameIntroOverlay();
   });
 }
 

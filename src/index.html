@@ -91,7 +91,7 @@
             <img src="../static/player_3_03.png" />
           </div>
           <div id="player-commoner-container" class="player hidden">
-            <img src="../static/player_commoner_01.png" />
+            <img id="player-commoner-img" src="../static/player_commoner_01.png" />
           </div>
         </div>
 
@@ -134,6 +134,10 @@
               <p>Oh and don’t worry about the plebs, they won’t mind. They won’t even know!</p>
 
               <p>You say Tory, we say… <b>PARTY!</b></p>
+
+              <div id="game-intro-screen-btn" class="game-overlay-button">
+                <a href="javascript:void(0)" class="eightbit-btn">Let's Go!</a>
+              </div>
             </div>
 
             <div class="game-overlay-content hidden" id="game-overlay-content-single">
@@ -145,10 +149,37 @@
               </p>
 
               <p>Shouldn’t be to hard…that is as long as the same rules apply to everyone…</p>
-            </div>
 
-            <div id="game-intro-screen-btn" class="game-overlay-button">
-              <a href="javascript:void(0)" class="eightbit-btn">Let's Go!</a>
+              <br />
+
+              <div id="select-commoner-player-spacer"></div>
+
+              <div id="select-commoner-player-sprite-container">
+                <p>Select your player to begin the game:</p>
+                <div id="select-commoner-player-sprites">
+                  <div
+                    class="select-commoner-player-sprite eightbit-btn eightbit-btn"
+                    data-skin-tone="0"
+                  >
+                    <img src="../static/commoner_variants/commoner_var0_01.png" />
+                  </div>
+                  <div class="select-commoner-player-sprite eightbit-btn" data-skin-tone="1">
+                    <img src="../static/commoner_variants/commoner_var1_01.png" />
+                  </div>
+                  <div class="select-commoner-player-sprite eightbit-btn" data-skin-tone="2">
+                    <img src="../static/commoner_variants/commoner_var2_01.png" />
+                  </div>
+                  <div class="select-commoner-player-sprite eightbit-btn" data-skin-tone="3">
+                    <img src="../static/commoner_variants/commoner_var3_01.png" />
+                  </div>
+                  <div class="select-commoner-player-sprite eightbit-btn" data-skin-tone="4">
+                    <img src="../static/commoner_variants/commoner_var4_01.png" />
+                  </div>
+                  <div class="select-commoner-player-sprite eightbit-btn" data-skin-tone="5">
+                    <img src="../static/commoner_variants/commoner_var5_01.png" />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
