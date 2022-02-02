@@ -13,10 +13,17 @@ const cardTemplate = (card, player, isSinglePlayerMode) => {
     }
   }
 
+  let sourceHtml = '';
+  if (card.source) {
+    sourceHtml = `<a href="${card.source}" target="_blank">*</a>`;
+  }
+
   return `
 <div id="card">
     <div id="card-player-name">${player.name}</div>
-    <div id="card-text">${card.text}</div>
+    <div id="card-text">
+      ${card.text}${sourceHtml}
+    </div>
     <div id="card-position-change-text">${positionChangeText}</div>
     <div id="card-close-button-container">
         <button id="card-close-button">Close</button>
