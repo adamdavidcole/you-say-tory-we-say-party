@@ -69,7 +69,10 @@ function updateGameTurnUI() {
       const ellipseInterval = setInterval(() => {
         if (ellipseCount === 3) {
           clearInterval(ellipseInterval);
-          nextTurn();
+          if (gameState.status !== GAME_STATES.GAME_OVER) {
+            // if computer has not already run, automatically begin turn
+            nextTurn();
+          }
           return;
         }
 
@@ -209,6 +212,9 @@ function onCardClose() {
   if (hasPlayerWon) {
     gameState.status = GAME_STATES.GAME_OVER;
 
+    const nextTurnStateEl = document.getElementById('next-turn-state');
+    nextTurnStateEl.classList.add('hidden');
+
     setTimeout(() => {
       updateGameOverStatus(currPlayer, currentPlayerTurnIndex);
 
@@ -235,7 +241,7 @@ function nextTurn() {
 
   const cardDeck = getCardDeck(currPlayer.role);
   const card = cardDeck.drawCard();
-  showCard(card, currPlayer, onCardClose);
+  showCard({ card, player: currPlayer, onCardClose, isSinglePlayerMode: isSinglePlayer() });
   playBeepUp2();
 
   gameState.lastCardDrawn = card;
