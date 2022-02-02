@@ -77,7 +77,7 @@ export default class GameDisplay {
     const heightUnit = this.height / 8;
 
     const leftBorder = this.width / 50;
-    const topBorder = 3 * heightUnit;
+    const topBorder = 2.85 * heightUnit;
     const width = this.width - 2 * leftBorder;
     const height = heightUnit;
     const sectionWidth = width / MAX_MP_POSITION;

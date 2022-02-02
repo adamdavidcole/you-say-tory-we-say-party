@@ -213,7 +213,7 @@ function onCardClose() {
     gameState.status = GAME_STATES.GAME_OVER;
 
     const nextTurnStateEl = document.getElementById('next-turn-state');
-    nextTurnStateEl.classList.add('hidden');
+    // nextTurnStateEl.classList.add('hidden'); TODO hide next turn without losing black bar
 
     setTimeout(() => {
       updateGameOverStatus(currPlayer, currentPlayerTurnIndex);
