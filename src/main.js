@@ -180,7 +180,10 @@ function startGame(playerCount) {
 
   createPlayers(playerCount);
   gameState.status = GAME_STATES.PLAYING;
-  gameState.isSinglePlayer = playerCount === 1;
+  if (playerCount === 1) {
+    gameState.isSinglePlayer = true;
+    gameState.nextPlayerTurn = 1; // start game with real person
+  }
 
   initializeGameStateEl.classList.add('hidden');
   nextTurnStateEl.classList.remove('hidden');
