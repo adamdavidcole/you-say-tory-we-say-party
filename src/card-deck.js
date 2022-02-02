@@ -18,9 +18,17 @@ export default class CardDeck {
     // if we have gone through all the cards, reset the index counter and shuffle deck
     if (this.currIndex === this.cards.length) {
       this.currIndex = 0;
-      this.cards = shuffleArray(this.cards);
+      this.shuffleDeck();
     }
 
     return card;
+  }
+
+  peekCard() {
+    return this.cards[this.currIndex];
+  }
+
+  shuffleDeck() {
+    this.cards = shuffleArray(this.cards);
   }
 }
