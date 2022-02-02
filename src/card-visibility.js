@@ -15,7 +15,7 @@ const cardTemplate = (card, player, isSinglePlayerMode) => {
 
   let sourceHtml = '';
   if (card.source) {
-    sourceHtml = `<a href="${card.source}" target="_blank">*</a>`;
+    sourceHtml = `<a href="${card.source}" target="_blank"><i class="fas fa-link"></i></a>`;
   }
 
   return `

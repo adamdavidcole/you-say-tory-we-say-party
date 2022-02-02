@@ -232,6 +232,12 @@ div {
   font-weight: 700;
 }
 
+#card-text i {
+  position: relative;
+  top: -1px;
+  margin-left: 6px;
+}
+
 /* PLAYERS */
 
 .player {

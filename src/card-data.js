@@ -21,7 +21,8 @@ const MpCards = [
     positionChangeText: 'Move back 3 steps.',
     computerPositionChangeText: 'He moves back 3 steps.',
     positionChange: -3,
-    source: '',
+    source:
+      'https://www.itv.com/news/2021-12-07/no-10-staff-joke-in-leaked-recording-about-christmas-party-they-later-denied',
   },
   {
     text: 'The public finds out you attended a party the day before Queen Elizabeth went to her husband’s funeral alone.',
