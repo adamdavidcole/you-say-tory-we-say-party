@@ -86,7 +86,7 @@ const MpCards = [
       'https://www.theguardian.com/uk-news/2021/dec/08/met-police-say-they-will-not-investigate-downing-street-christmas-party',
   },
   {
-    text: 'Prime minister spokesperson claims covid rules have been followed at all times. When asked how that could possibly be true in spite of all the evidence, response: "It’s simply just a statement of fact.”',
+    text: 'Prime minister spokesperson claims covid rules have been followed at all times. When asked how that could possibly be true in spite of all the evidence, responds: "It’s simply just a statement of fact.”',
     positionChangeText: 'Move forward 3 spaces.',
     computerPositionChangeText: 'He moves forward 3 spaces.',
     positionChange: 3,
@@ -124,7 +124,7 @@ const MpCards = [
       'https://www.telegraph.co.uk/politics/2022/01/13/two-parties-held-downing-street-queen-country-mourned-death/',
   },
   {
-    text: 'Draw up a plan, named "Operation Save Big Dog", in an attempt to retain your premiership in the face of "partygate" allegations.',
+    text: 'Draw up a plan, named "Operation Save Big Dog" in an attempt to retain your premiership in the face of "partygate" allegations.',
     positionChangeText: 'Move forward 1 space.',
     computerPositionChangeText: 'He moves forward 1 space.',
     positionChange: 1,

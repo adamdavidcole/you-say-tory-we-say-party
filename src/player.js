@@ -1,7 +1,7 @@
 import { MAX_COMMONER_POSITION, MAX_MP_POSITION, ROLES } from './constants';
 import createId from './utilities/create-id';
 
-const mpPlayerNames = ['Boris J.', 'Allegra S.', 'Shaun B.'];
+const mpPlayerNames = ['Boris J.', 'Nadine D.', 'Jacob R.M.'];
 const commonerName = 'Commoner';
 
 export default class Player {
