@@ -238,6 +238,13 @@ div {
   margin-left: 6px;
 }
 
+.position_change_forward {
+  color: #4aa52e;
+}
+.position_change_backward {
+  color: #8c2022;
+}
+
 /* PLAYERS */
 
 .player {
@@ -327,7 +334,7 @@ div {
 }
 
 #game-overlay-content-single > p {
-  max-width: 500px;
+  max-width: 700px;
 }
 
 .game-overlay-button {

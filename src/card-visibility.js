@@ -13,6 +13,16 @@ const cardTemplate = (card, player, isSinglePlayerMode) => {
     }
   }
 
+  // wrap position change text
+  if (card.positionChange > 0) {
+    positionChangeText = `<span class="position_change_forward" >${positionChangeText}</span>`;
+  } else {
+    positionChangeText = `<span class="position_change_backward" >${positionChangeText}</span>`;
+  }
+
+  // remove ending period
+  positionChangeText = positionChangeText.replace(/\./g, '');
+
   let sourceHtml = '';
   if (card.source) {
     sourceHtml = `<a href="${card.source}" target="_blank"><i class="fas fa-link"></i></a>`;
