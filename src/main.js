@@ -17,6 +17,7 @@ import {
   playMoggSound,
   playNadineSound,
 } from './audio-player';
+import getGameOverContent from './utilities/get-game-over-content';
 
 const gameState = {};
 
@@ -178,8 +179,8 @@ function updateGameOverStatus(player) {
 
   nextTurnStateEl.classList.add('hidden');
 
-  const gameOverHtml = `<p>${player.name} the ${player.role} has won the game in ${gameState.currentRound} rounds</p>`;
-  gameOverContentEl.innerHTML = gameOverHtml;
+  const gameOverContentHTML = getGameOverContent(player, gameState);
+  gameOverContentEl.innerHTML = gameOverContentHTML;
 
   showGameOverOverlay();
 }
