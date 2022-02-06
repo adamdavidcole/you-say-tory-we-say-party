@@ -54,6 +54,8 @@ body {
   overflow: hidden;
 
   background-color: #fe9a9c;
+
+  margin: min(3vw, 6vh) 0;
 }
 
 #game-start-view {
@@ -133,6 +135,12 @@ div {
 
 .select-number-of-players-radio-option {
   margin-right: min(1.125vw, 2.25vh); /* 15px; */
+}
+
+#mulit-player-button-options .multi-player-mode-btn {
+  /* display: flex;
+  justify-content: space-around; */
+  margin-right: min(1.2vw, 2.4vh);
 }
 
 #start-single-player-mode-btn {
@@ -339,8 +347,15 @@ div {
   align-items: center;
 }
 
+.game-overlay-content-divider {
+  width: 100%;
+  margin: min(3vw, 6vh) 0 min(0.6vw, 1.2vh);
+  border-bottom: min(0.3vw, 0.6vh) solid black;
+}
+
 #game-overlay-content-single > p {
   max-width: 700px;
+  font-size: min(1vw, 2vh);
 }
 
 .game-overlay-button {
