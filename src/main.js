@@ -12,6 +12,10 @@ import {
   playBeepUp1,
   playBeepUp2,
   playBeepDown1,
+  playBorisSound,
+  playCommonerSound,
+  playMoggSound,
+  playNadineSound,
 } from './audio-player';
 
 const gameState = {};
@@ -245,6 +249,24 @@ function onCardClose() {
     } else {
       playBeepDown1();
     }
+
+    setTimeout(() => {
+      switch (currPlayer.name) {
+        case 'Boris J.':
+          playBorisSound();
+          break;
+        case 'Nadine D.':
+          playNadineSound();
+          break;
+        case 'Jacob R.M.':
+          playMoggSound();
+          break;
+        case 'Commoner':
+          playCommonerSound();
+          break;
+        default:
+      }
+    }, 500);
 
     gameState.nextPlayerTurn = (gameState.nextPlayerTurn + 1) % gameState.numPlayers;
     if (gameState.nextPlayerTurn === 0) gameState.currentRound += 1;

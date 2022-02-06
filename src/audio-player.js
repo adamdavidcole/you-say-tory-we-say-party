@@ -5,6 +5,11 @@ const beepUp1 = document.getElementById('beep-up-1-audio');
 const beepUp2 = document.getElementById('beep-up-2-audio');
 const beepDown1 = document.getElementById('beep-down-1-audio');
 
+const commonerSound = document.getElementById('commoner-sound');
+const borisSound = document.getElementById('boris-sound');
+const nadineSound = document.getElementById('nadine-sound');
+const moggSound = document.getElementById('mogg-sound');
+
 export function playCommonerAudio() {
   if (!commonerAudio.paused) return;
 
@@ -39,4 +44,30 @@ export function playBeepUp2() {
 
 export function playBeepDown1() {
   beepDown1.play();
+}
+
+const characterSoundVolume = 0.075;
+
+export function playCommonerSound() {
+  commonerSound.volume = characterSoundVolume;
+
+  commonerSound.play();
+}
+
+export function playNadineSound() {
+  nadineSound.volume = characterSoundVolume;
+
+  nadineSound.play();
+}
+
+export function playBorisSound() {
+  borisSound.volume = characterSoundVolume;
+
+  borisSound.play();
+}
+
+export function playMoggSound() {
+  moggSound.volume = characterSoundVolume;
+
+  moggSound.play();
 }
