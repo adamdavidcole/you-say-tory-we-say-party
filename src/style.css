@@ -56,6 +56,12 @@ body {
   background-color: #fe9a9c;
 }
 
+#game-start-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 #game-header {
   margin: min(3vw, 6vh) min(1.5vw, 3vh); /*40px 20px;*/
 }
