@@ -71,3 +71,23 @@ export function playMoggSound() {
 
   moggSound.play();
 }
+
+export function playPlayerSound(player, delay = 0) {
+  setTimeout(() => {
+    switch (player.name) {
+      case 'Boris J.':
+        playBorisSound();
+        break;
+      case 'Nadine D.':
+        playNadineSound();
+        break;
+      case 'Jacob R.M.':
+        playMoggSound();
+        break;
+      case 'Commoner':
+        playCommonerSound();
+        break;
+      default:
+    }
+  }, delay);
+}

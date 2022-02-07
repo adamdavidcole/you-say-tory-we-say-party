@@ -159,7 +159,7 @@ const MpCards = [
 
 const CommonerCards = [
   {
-    text: 'You test negative for Covid. The sun is shining. It’s a good day.',
+    text: 'Today you woke up without a crushing sense of dread.',
     positionChangeText: 'Move forward 1 space.',
     positionChange: 1,
   },
@@ -219,7 +219,7 @@ const CommonerCards = [
     positionChange: 0,
   },
   {
-    text: 'You did something great today.',
+    text: 'You went for a quick walk around the block alone and then returned straight back home.',
     positionChangeText: 'Move forward 1 space.',
     positionChange: 1,
   },
@@ -249,7 +249,7 @@ const CommonerCards = [
     positionChange: 0,
   },
   {
-    text: 'You did something great today.',
+    text: 'You did something great today instead of spending the whole day in bed.',
     positionChangeText: 'Move forward 1 space.',
     positionChange: 1,
   },

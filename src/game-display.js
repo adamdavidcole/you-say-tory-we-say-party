@@ -76,11 +76,14 @@ export default class GameDisplay {
   getMpTrackPosition() {
     const heightUnit = this.height / 8;
 
-    const leftBorder = this.width / 50;
+    const leftBorder = this.width / 20;
     const topBorder = 2.85 * heightUnit;
     const width = this.width - 2 * leftBorder;
     const height = heightUnit;
     const sectionWidth = width / MAX_MP_POSITION;
+
+    const gapSize = this.width / 16.5;
+    const spacedSectionWidth = (width - gapSize * 3) / MAX_MP_POSITION;
 
     return {
       leftBorder,
@@ -88,6 +91,9 @@ export default class GameDisplay {
       width,
       height,
       sectionWidth,
+
+      gapSize,
+      spacedSectionWidth,
     };
   }
 
@@ -95,9 +101,9 @@ export default class GameDisplay {
     const heightUnit = this.height / 8;
     const { topBorder, width, height } = this.getMpTrackPosition();
 
-    const commonerLeftBorder = this.width / 2 - width / 8;
+    const commonerLeftBorder = this.width / 2 - width / 8.75;
     const commonerTopBorder = topBorder + 2 * heightUnit;
-    const commonerWidth = width / 4;
+    const commonerWidth = width / 4.38;
     const commonerHeight = heightUnit;
     const commonerSectionWidth = commonerWidth / MAX_COMMONER_POSITION;
 
@@ -110,9 +116,18 @@ export default class GameDisplay {
     };
   }
 
+  // gets mp position offset from left border
+  getMpXPos(mpPos) {
+    const { leftBorder, gapSize, spacedSectionWidth } = this.getMpTrackPosition();
+
+    const gaps = Math.floor(mpPos / 4);
+    const xPos = leftBorder + mpPos * spacedSectionWidth + gaps * gapSize;
+    return xPos;
+  }
+
   drawSetting() {
     // MP border
-    const { leftBorder, topBorder, width, height, sectionWidth } = this.getMpTrackPosition();
+    const { leftBorder, topBorder, width, height, spacedSectionWidth } = this.getMpTrackPosition();
 
     // this.ctx.drawImage(mpTrackBackgroundImg, leftBorder, topBorder, width, height);
 
@@ -124,7 +139,15 @@ export default class GameDisplay {
       this.ctx.closePath();
 
       for (let i = 0; i < MAX_MP_POSITION; i += 1) {
-        const lineStartX = leftBorder + i * sectionWidth;
+        const lineStartX = this.getMpXPos(i);
+
+        if ((i + 1) % 4 === 0) {
+          this.ctx.beginPath();
+          this.ctx.moveTo(lineStartX + spacedSectionWidth, topBorder);
+          this.ctx.lineTo(lineStartX + spacedSectionWidth, topBorder + height);
+          this.ctx.stroke();
+        }
+
         this.ctx.beginPath();
         this.ctx.moveTo(lineStartX, topBorder);
         this.ctx.lineTo(lineStartX, topBorder + height);
@@ -188,7 +211,7 @@ export default class GameDisplay {
       const xPosition =
         offsetLeft + // canvas offset
         leftBorder + // mp track offset
-        gamePosition * sectionWidth - // player position offset
+        this.getMpXPos(gamePosition - 1) - // player position offset
         sectionWidth / 2 - // negative offset to be in middle of section
         radius / 2; // negative offset for avater to be centered in section
       const yPosition =

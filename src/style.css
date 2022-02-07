@@ -353,8 +353,9 @@ div {
   border-bottom: min(0.3vw, 0.6vh) solid black;
 }
 
-#game-overlay-content-single > p {
-  max-width: 700px;
+#game-overlay-content-single > p,
+#game-overlay-content-multi > p {
+  max-width: 850px;
   font-size: min(1vw, 2vh);
 }
 
