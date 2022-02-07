@@ -246,9 +246,8 @@ function onCardClose() {
       playBeepUp1();
     } else {
       playBeepDown1();
+      playPlayerSound(currPlayer, 400);
     }
-
-    playPlayerSound(currPlayer, 400);
 
     gameState.nextPlayerTurn = (gameState.nextPlayerTurn + 1) % gameState.numPlayers;
     if (gameState.nextPlayerTurn === 0) gameState.currentRound += 1;
