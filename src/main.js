@@ -185,6 +185,7 @@ function updateGameOverStatus(player) {
 function startGame(playerCount) {
   const initializeGameStateEl = document.getElementById('game-start-view');
   const nextTurnStateEl = document.getElementById('next-turn-state');
+  const nextTurnButton = document.getElementById('next-turn-button');
 
   createPlayers(playerCount);
   gameState.status = GAME_STATES.PLAYING;
@@ -195,6 +196,7 @@ function startGame(playerCount) {
 
   initializeGameStateEl.classList.add('hidden');
   nextTurnStateEl.classList.remove('hidden');
+  nextTurnButton.classList.remove('hidden');
 
   // updateGameTurnUI();
   gameDisplay.initializeGame();
