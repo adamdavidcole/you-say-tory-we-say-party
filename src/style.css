@@ -401,6 +401,11 @@ div {
   object-fit: contain;
 }
 
+#game-over-survery-link-container {
+  flex-grow: 1;
+  border-top: 4px solid black;
+}
+
 /** 
  * BUTTONS
  * source: https://codepen.io/MatthewShields/pen/pwrXpV?editors=1100
