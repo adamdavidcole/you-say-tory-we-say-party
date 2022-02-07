@@ -249,23 +249,6 @@ function onCardClose() {
     }
 
     playPlayerSound(currPlayer, 400);
-    // setTimeout(() => {
-    //   switch (currPlayer.name) {
-    //     case 'Boris J.':
-    //       playBorisSound();
-    //       break;
-    //     case 'Nadine D.':
-    //       playNadineSound();
-    //       break;
-    //     case 'Jacob R.M.':
-    //       playMoggSound();
-    //       break;
-    //     case 'Commoner':
-    //       playCommonerSound();
-    //       break;
-    //     default:
-    //   }
-    // }, 500);
 
     gameState.nextPlayerTurn = (gameState.nextPlayerTurn + 1) % gameState.numPlayers;
     if (gameState.nextPlayerTurn === 0) gameState.currentRound += 1;

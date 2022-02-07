@@ -1,4 +1,4 @@
-import { ROLES } from './constants';
+import { ROLES, POSITION_CHANGE_SPECIAL } from './constants';
 
 const MpCards = [
   {
@@ -81,7 +81,7 @@ const MpCards = [
     text: 'Metropolitan Police initially decide not to open an investigation into possible breaches of covid-19 policy in spite of mounting evidence.',
     positionChangeText: 'Advance to next area.',
     computerPositionChangeText: 'He advances to next area.',
-    positionChange: 5, // TODO: implement advance to next area
+    positionChange: POSITION_CHANGE_SPECIAL.ADVANCE,
     source:
       'https://www.theguardian.com/uk-news/2021/dec/08/met-police-say-they-will-not-investigate-downing-street-christmas-party',
   },
@@ -104,7 +104,7 @@ const MpCards = [
     text: 'Send an email to over one hundred Downing Street staff inviting them “to make the most of the lovely weather and have some socially distanced drinks in the No 10 garden this evening.... bring your own booze!”',
     positionChangeText: 'Advance to next area',
     computerPositionChangeText: 'He advances to next area.',
-    positionChange: 5, // TODO: implement advance to next area
+    positionChange: POSITION_CHANGE_SPECIAL.ADVANCE,
     source:
       'https://www.theguardian.com/politics/2022/jan/10/email-shows-boris-johnsons-official-invited-no-10-staff-to-lockdown-byob-party',
   },

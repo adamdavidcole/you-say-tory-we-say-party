@@ -11,3 +11,7 @@ export const GAME_STATES = {
   PLAYING: 'playing',
   GAME_OVER: 'game_over',
 };
+
+export const POSITION_CHANGE_SPECIAL = {
+  ADVANCE: 'advance',
+};

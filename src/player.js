@@ -1,4 +1,9 @@
-import { MAX_COMMONER_POSITION, MAX_MP_POSITION, ROLES } from './constants';
+import {
+  MAX_COMMONER_POSITION,
+  MAX_MP_POSITION,
+  ROLES,
+  POSITION_CHANGE_SPECIAL,
+} from './constants';
 import createId from './utilities/create-id';
 
 const mpPlayerNames = ['Boris J.', 'Nadine D.', 'Jacob R.M.'];
@@ -27,7 +32,13 @@ export default class Player {
   }
 
   updatePosition(positionChange) {
-    this.position += positionChange;
+    if (positionChange === POSITION_CHANGE_SPECIAL.ADVANCE) {
+      const areaSize = MAX_MP_POSITION / 4;
+      this.position += areaSize - ((this.position - 1) % areaSize);
+    } else {
+      this.position += positionChange;
+    }
+
     this.ensurePositionWithinBounds();
   }
 

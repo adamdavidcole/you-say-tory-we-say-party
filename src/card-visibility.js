@@ -1,3 +1,5 @@
+import { POSITION_CHANGE_SPECIAL } from './constants';
+
 let cardIsVisible = false;
 
 const cardContainerEl = document.getElementById('card-container');
@@ -14,7 +16,7 @@ const cardTemplate = (card, player, isSinglePlayerMode) => {
   }
 
   // wrap position change text
-  if (card.positionChange > 0) {
+  if (card.positionChange > 0 || card.positionChange === POSITION_CHANGE_SPECIAL.ADVANCE) {
     positionChangeText = `<span class="position_change_forward" >${positionChangeText}</span>`;
   } else {
     positionChangeText = `<span class="position_change_backward" >${positionChangeText}</span>`;
