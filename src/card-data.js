@@ -189,9 +189,9 @@ const CommonerCards = [
     positionChange: 1,
   },
   {
-    text: 'New and tighter lockdown restrictions were announced.',
-    positionChangeText: 'Do not move any spaces.',
-    positionChange: 0,
+    text: 'You got pinged by the track and trace app. Self-isolate for 10 days.',
+    positionChangeText: 'Move back to the beginning.',
+    positionChange: -5,
   },
   {
     text: 'You caught Covid. Self-isolate for 10 days.',
