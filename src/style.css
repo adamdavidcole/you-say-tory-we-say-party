@@ -266,16 +266,16 @@ div {
 
 /* Card Selection UI */
 #card-selection-wrapper {
-  position: absolute;
+  /* position: absolute;
   top: 0;
-  left: 0;
+  left: 0; */
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   background-color: transparent;
   transition: background-color 0.15s ease;
 
   z-index: 1;
-  /* flex-grow: 1; */
+  flex-grow: 1;
 }
 
 #card-selection-wrapper.fade-in {
@@ -317,7 +317,11 @@ div {
 }
 
 .flip-card-front {
-  background-color: antiquewhite;
+  background-color: rgb(250, 235, 215);
+}
+
+#cards-selection-container:not(.computer-selection) .flip-card-front:hover {
+  background-color: rgb(240, 215, 184);
 }
 
 .flip-card-back {
@@ -345,6 +349,10 @@ div {
 
 .hidden {
   display: none !important;
+}
+
+.invisible {
+  visibility: hidden !important;
 }
 
 /* Setting */

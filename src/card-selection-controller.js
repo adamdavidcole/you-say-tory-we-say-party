@@ -190,18 +190,15 @@ function onClickHandler({ e, cardDeck, player, isSinglePlayer, onCardClose }) {
   cardEl.removeEventListener('click', this);
 }
 
-function setWrapperHeight() {
-  //   const nextTurnEl = document.getElementById('next-turn-state');
-  //   const totalInitialHeight = cardContainer.offsetHeight - nextTurnEl.offsetHeight + 4;
-  //   cardContainerWrapper.style.height = `${totalInitialHeight}px`;
-}
-
 export function showCards({ cardDeck, player, isSinglePlayer, onCardClose }) {
   cardContainerWrapper.classList.remove('hidden');
-
-  setTimeout(() => setWrapperHeight(), 0);
-
   setTimeout(() => cardContainerWrapper.classList.add('fade-in'), 0);
+
+  if (player.isComputer) {
+    cardContainer.classList.add('computer-selection');
+  } else {
+    cardContainer.classList.remove('computer-selection');
+  }
 
   generateCardUI();
   attachClickHandlers({ cardDeck, player, isSinglePlayer, onCardClose });

@@ -69,27 +69,34 @@ function updateGameTurnUI() {
 
   if (isSinglePlayer()) {
     if (nextPlayer.isComputer) {
-      nextTurnButton.classList.add('hidden');
+      nextTurnButton.classList.add('invisible');
 
       let ellipseCount = 0;
       let messageContent = 'Boris is drawing a card';
+      const originalMessageContent = messageContent;
       nextPlayerTurnDetailsEl.innerHTML = messageContent;
       const ellipseInterval = setInterval(() => {
         if (ellipseCount === 3) {
-          clearInterval(ellipseInterval);
           if (gameState.status !== GAME_STATES.GAME_OVER) {
             // if computer has not already run, automatically begin turn
             nextTurn();
           }
+        }
+
+        if (ellipseCount === 9) {
+          clearInterval(ellipseInterval);
           return;
         }
 
+        if (ellipseCount % 3 === 0) {
+          messageContent = originalMessageContent;
+        }
         messageContent += '.';
         ellipseCount += 1;
         nextPlayerTurnDetailsEl.innerHTML = messageContent;
       }, 500);
     } else {
-      nextTurnButton.classList.remove('hidden');
+      nextTurnButton.classList.remove('invisible');
       nextPlayerTurnDetailsEl.innerHTML = 'Your turn! Click to draw card...';
     }
   } else {
@@ -196,7 +203,7 @@ function startGame(playerCount) {
 
   initializeGameStateEl.classList.add('hidden');
   nextTurnStateEl.classList.remove('hidden');
-  nextTurnButton.classList.remove('hidden');
+  nextTurnButton.classList.remove('invisible');
 
   // updateGameTurnUI();
   gameDisplay.initializeGame();
