@@ -4,7 +4,7 @@ export default function getGameOverContent(winningPlayer, gameState) {
   if (winningPlayer.role === ROLES.MP) {
     if (gameState.isSinglePlayer) {
       return `
-                <p>Sorry, you lose. Boris J. has won the game!</p>
+                <p>Oof, you lose. Boris J. has won the game!</p>
                 <br/>
                 <p>Are you surprised that Boris is sipping on wine and munching on cheese at a christmas party while you never even made it to see your Grandma in the hospital?</p>
                 <p>...Or should you have predicted that its <i>one rule for them, and another for everyone else?</i></p>

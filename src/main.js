@@ -1,6 +1,6 @@
 /* eslint-disable arrow-parens */
 import { ROLES, GAME_STATES } from './constants';
-import CardDeck from './card-deck';
+import CardDeck, { getLastCardDraw } from './card-deck';
 import Player from './player';
 import GameDisplay from './game-display';
 import { showCard, hideCard } from './card-visibility';
@@ -15,6 +15,7 @@ import {
   playPlayerSound,
 } from './audio-player';
 import getGameOverContent from './utilities/get-game-over-content';
+import { showCards } from './card-selection-controller';
 
 const gameState = {};
 
@@ -24,7 +25,6 @@ function setInitialGameState() {
   gameState.currentRound = 0;
   gameState.nextPlayerTurn = 0;
   gameState.players = [];
-  gameState.lastCardDrawn = null;
   gameState.isSinglePlayer = false;
   gameState.commonerSpriteSrc = '';
 }
@@ -227,7 +227,7 @@ function onCardClose() {
   const currentPlayerTurnIndex = gameState.nextPlayerTurn;
   const currPlayer = gameState.players[currentPlayerTurnIndex];
 
-  const card = gameState.lastCardDrawn;
+  const card = getLastCardDraw();
   currPlayer.updatePosition(card.positionChange);
   const hasPlayerWon = currPlayer.checkHasPlayerWon();
 
@@ -269,10 +269,21 @@ function nextTurn() {
     console.log('bad start!');
   }
 
-  showCard({ card, player: currPlayer, onCardClose, isSinglePlayerMode: isSinglePlayer() });
+  // showCard({ card, player: currPlayer, onCardClose, isSinglePlayerMode: isSinglePlayer() });
+
+  showCards({ cardDeck, player: currPlayer, onCardClose, isSinglePlayerMode: isSinglePlayer() });
+
+  if (currPlayer.isComputer) {
+    const randomInt = Math.floor(Math.random() * 4);
+    setTimeout(() => {
+      const randomCardEl = document.getElementById(`card-selection-option-${randomInt}`);
+      randomCardEl.click();
+    }, 1000);
+  }
+
   playBeepUp2();
 
-  gameState.lastCardDrawn = card;
+  // gameState.lastCardDrawn = card;
 
   nextTurnButton.disabled = true;
 }

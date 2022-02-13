@@ -65,7 +65,7 @@ body {
 }
 
 #game-header {
-  margin: min(3vw, 6vh) min(1.5vw, 3vh); /*40px 20px;*/
+  margin: min(3vw, 6vh) min(1.5vw, 3vh) min(1.5vw, 3vh) min(1.5vw, 3vh); /*40px 20px;*/
 }
 
 #game-header-title {
@@ -237,11 +237,16 @@ div {
 #card-player-name {
   font-weight: 700;
   margin-bottom: 1.5vw; /* 20px */
-  font-size: 1.8vw; /* 24px */
+  font-size: min(1.5vw, 3vh); /*  */
+}
+
+#card-text,
+#card-position-change-text,
+#card-close-button {
+  font-size: min(0.75vw, 1.5vh);
 }
 
 #card-position-change-text {
-  margin-top: 1.5vw; /* 20px */
   text-align: center;
   font-weight: 700;
 }
@@ -257,6 +262,71 @@ div {
 }
 .position_change_backward {
   color: #8c2022;
+}
+
+/* Card Selection UI */
+#card-selection-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  transition: background-color 0.15s ease;
+
+  z-index: 1;
+  /* flex-grow: 1; */
+}
+
+#card-selection-wrapper.fade-in {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+#card-selection-wrapper.fade-out {
+  background-color: transparent;
+}
+
+#card-selection-wrapper.hidden {
+  background-color: transparent;
+}
+
+#cards-selection-container {
+  height: 100%;
+  width: 100%;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: space-around; */
+}
+
+#cards-selection-container.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-selection-option {
+  width: 250px;
+  height: 150px;
+  background-color: purple;
+  position: absolute;
+  transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.flip-card-front,
+.flip-card-back {
+  border-radius: 5px;
+}
+
+.flip-card-front {
+  background-color: antiquewhite;
+}
+
+.flip-card-back {
+  -webkit-font-smoothing: none;
+  padding: min(1.5vw, 3vh);
+  background-color: antiquewhite;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 /* PLAYERS */
@@ -404,6 +474,45 @@ div {
 #game-over-survery-link-container {
   flex-grow: 1;
   border-top: 4px solid black;
+}
+
+/**
+ * CARD FLIP
+ * source: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_flip_card
+ */
+
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 300px;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
 }
 
 /** 

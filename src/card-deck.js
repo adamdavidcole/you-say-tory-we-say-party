@@ -2,6 +2,12 @@
 import shuffleArray from './utilities/shuffle-array';
 import getCards from './card-data';
 
+let lastCardDrawn;
+
+export function getLastCardDraw() {
+  return lastCardDrawn;
+}
+
 export default class CardDeck {
   constructor(role) {
     const unshuffledCards = getCards(role);
@@ -20,6 +26,8 @@ export default class CardDeck {
       this.currIndex = 0;
       this.shuffleDeck();
     }
+
+    lastCardDrawn = card;
 
     return card;
   }

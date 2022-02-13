@@ -4,7 +4,7 @@ let cardIsVisible = false;
 
 const cardContainerEl = document.getElementById('card-container');
 
-const cardTemplate = (card, player, isSinglePlayerMode) => {
+export const cardTemplate = (card, player, isSinglePlayerMode) => {
   let positionChangeText = card.positionChangeText;
 
   if (isSinglePlayerMode) {
@@ -31,7 +31,7 @@ const cardTemplate = (card, player, isSinglePlayerMode) => {
   }
 
   return `
-<div id="card">
+
     <div id="card-player-name">${player.name}</div>
     <div id="card-text">
       ${card.text}${sourceHtml}
@@ -40,7 +40,7 @@ const cardTemplate = (card, player, isSinglePlayerMode) => {
     <div id="card-close-button-container">
         <button id="card-close-button">Close</button>
     </div>
-</div>`;
+`;
 };
 
 export function showCard({ card, player, onCardClose, isSinglePlayerMode }) {
