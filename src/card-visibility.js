@@ -7,6 +7,15 @@ const cardContainerEl = document.getElementById('card-container');
 export const cardTemplate = (card, player, isSinglePlayerMode) => {
   let positionChangeText = card.positionChangeText;
 
+  let computerText = '';
+  if (isSinglePlayerMode) {
+    if (player.isComputer) {
+      computerText = '<div id="card-player-subtitle">(computer)</div>';
+    } else {
+      computerText = '<div id="card-player-subtitle">(you)</div>';
+    }
+  }
+
   if (isSinglePlayerMode) {
     if (player.isComputer) {
       positionChangeText = card.positionChangeText;
@@ -32,7 +41,7 @@ export const cardTemplate = (card, player, isSinglePlayerMode) => {
 
   return `
 
-    <div id="card-player-name">${player.name}</div>
+    <div id="card-player-name">${player.name} ${computerText}</div>
     <div id="card-text">
       ${card.text}${sourceHtml}
     </div>

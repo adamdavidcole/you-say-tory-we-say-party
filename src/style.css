@@ -240,9 +240,14 @@ div {
   font-size: min(1.5vw, 3vh); /*  */
 }
 
+#card-player-subtitle {
+  margin-top: min(0.375vw, 0.75vh); /* 5px */
+}
+
 #card-text,
 #card-position-change-text,
-#card-close-button {
+#card-close-button,
+#card-player-subtitle {
   font-size: min(0.75vw, 1.5vh);
 }
 

@@ -72,7 +72,7 @@ function updateGameTurnUI() {
       nextTurnButton.classList.add('invisible');
 
       let ellipseCount = 0;
-      let messageContent = 'Boris is drawing a card';
+      let messageContent = 'Boris (computer) is drawing a card';
       const originalMessageContent = messageContent;
       nextPlayerTurnDetailsEl.innerHTML = messageContent;
       const ellipseInterval = setInterval(() => {
@@ -278,7 +278,7 @@ function nextTurn() {
 
   // showCard({ card, player: currPlayer, onCardClose, isSinglePlayerMode: isSinglePlayer() });
 
-  showCards({ cardDeck, player: currPlayer, onCardClose, isSinglePlayerMode: isSinglePlayer() });
+  showCards({ cardDeck, player: currPlayer, onCardClose, isSinglePlayer: isSinglePlayer() });
 
   if (currPlayer.isComputer) {
     const randomInt = Math.floor(Math.random() * 4);

@@ -127,6 +127,7 @@ function arrangeCardsOnscreen() {
 function insertCardData({ cardEl, cardDeck, player, isSinglePlayer }) {
   const cardData = cardDeck.drawCard();
 
+  console.log('insertCardData', isSinglePlayer);
   const cardHTML = cardTemplate(cardData, player, isSinglePlayer);
 
   const cardBackEl = cardEl.querySelector('.flip-card-back');
@@ -193,6 +194,8 @@ function onClickHandler({ e, cardDeck, player, isSinglePlayer, onCardClose }) {
 export function showCards({ cardDeck, player, isSinglePlayer, onCardClose }) {
   cardContainerWrapper.classList.remove('hidden');
   setTimeout(() => cardContainerWrapper.classList.add('fade-in'), 0);
+
+  console.log('showCards', isSinglePlayer);
 
   if (player.isComputer) {
     cardContainer.classList.add('computer-selection');
