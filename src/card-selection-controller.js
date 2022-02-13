@@ -177,6 +177,10 @@ function moveCardToCenter(cardIndex) {
 }
 
 function onClickHandler({ e, cardDeck, player, isSinglePlayer, onCardClose }) {
+  if (cardContainer.classList.contains('computer-selection')) {
+    return;
+  }
+
   const cardEl = e.target.closest('.card-selection-option');
   if (cardEl.dataset.hasBeenClick) return;
 
@@ -187,8 +191,14 @@ function onClickHandler({ e, cardDeck, player, isSinglePlayer, onCardClose }) {
   insertCardData({ cardEl, cardDeck, player, isSinglePlayer });
   attachOnCloseHandler({ cardEl, onCardClose });
   moveCardToCenter(cardIndex);
+}
 
-  cardEl.removeEventListener('click', this);
+export function addComputerLock() {
+  cardContainer.classList.add('computer-selection');
+}
+
+export function removeComputerLock() {
+  cardContainer.classList.remove('computer-selection');
 }
 
 export function showCards({ cardDeck, player, isSinglePlayer, onCardClose }) {

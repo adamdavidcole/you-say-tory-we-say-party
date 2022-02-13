@@ -15,7 +15,7 @@ import {
   playPlayerSound,
 } from './audio-player';
 import getGameOverContent from './utilities/get-game-over-content';
-import { showCards } from './card-selection-controller';
+import { showCards, addComputerLock, removeComputerLock } from './card-selection-controller';
 
 const gameState = {};
 
@@ -284,7 +284,10 @@ function nextTurn() {
     const randomInt = Math.floor(Math.random() * 4);
     setTimeout(() => {
       const randomCardEl = document.getElementById(`card-selection-option-${randomInt}`);
+
+      removeComputerLock();
       randomCardEl.click();
+      addComputerLock();
     }, 1000);
   }
 
