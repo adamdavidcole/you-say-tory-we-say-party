@@ -6,6 +6,14 @@ const cardContainer = document.getElementById('cards-selection-container');
 const delayTime = 500;
 const wrapperBackgroundDelayTime = 150;
 
+const CARD_SELECTION_STATES = {
+  HIDDEN: 'hidden',
+  GRID: 'grid',
+  CENTERED: 'centered',
+};
+let currCardSelectionState = CARD_SELECTION_STATES.HIDDEN;
+let lastCenteredCardIndex = -1;
+
 export default function init() {
   return 0;
 }
@@ -137,8 +145,6 @@ function insertCardData({ cardEl, cardDeck, player, isSinglePlayer }) {
 function attachOnCloseHandler({ cardEl, onCardClose }) {
   const cardCloseEl = document.getElementById('card-close-button');
 
-  console.log('onCardClose', onCardClose);
-
   cardCloseEl.addEventListener('click', () => {
     const windowHeight = window.innerHeight;
     cardEl.style.transform = 'top 0.15s ease'; // make close animation faster
@@ -151,7 +157,8 @@ function attachOnCloseHandler({ cardEl, onCardClose }) {
     }, wrapperBackgroundDelayTime);
 
     onCardClose();
-    console.log('handle card close');
+
+    currCardSelectionState = CARD_SELECTION_STATES.HIDDEN;
   });
 }
 
@@ -174,6 +181,8 @@ function moveCardToCenter(cardIndex) {
 
     card.classList.add('flipped');
   }, delayTime);
+
+  lastCenteredCardIndex = cardIndex;
 }
 
 function onClickHandler({ e, cardDeck, player, isSinglePlayer, onCardClose }) {
@@ -191,6 +200,8 @@ function onClickHandler({ e, cardDeck, player, isSinglePlayer, onCardClose }) {
   insertCardData({ cardEl, cardDeck, player, isSinglePlayer });
   attachOnCloseHandler({ cardEl, onCardClose });
   moveCardToCenter(cardIndex);
+
+  currCardSelectionState = CARD_SELECTION_STATES.CENTERED;
 }
 
 export function addComputerLock() {
@@ -219,4 +230,28 @@ export function showCards({ cardDeck, player, isSinglePlayer, onCardClose }) {
 
   arrangeCardsOffscreen();
   arrangeCardsOnscreen();
+
+  currCardSelectionState = CARD_SELECTION_STATES.GRID;
 }
+
+function handleResize() {
+  if (currCardSelectionState === CARD_SELECTION_STATES.HIDDEN) {
+    return;
+  }
+
+  if (currCardSelectionState === CARD_SELECTION_STATES.GRID) {
+    setCardSizes();
+    arrangeCardsOnscreen();
+    return;
+  }
+
+  if (currCardSelectionState === CARD_SELECTION_STATES.CENTERED) {
+    setCardSizes();
+    moveCardToCenter(lastCenteredCardIndex);
+    return;
+  }
+}
+
+window.addEventListener('resize', () => {
+  handleResize();
+});
