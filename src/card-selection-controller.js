@@ -1,4 +1,5 @@
 import { cardTemplate } from './card-visibility';
+import { ROLES } from './constants';
 
 const cardContainerWrapper = document.getElementById('card-selection-wrapper');
 const cardContainer = document.getElementById('cards-selection-container');
@@ -18,12 +19,14 @@ export default function init() {
   return 0;
 }
 
-function cardOptionTemplate(count) {
+function cardOptionTemplate(count, role) {
+  const cardType = role === ROLES.MP ? 'card_mp' : 'card_commoner';
+
   return `
-    <div class="flip-card card-selection-option"  id="card-selection-option-${count}" data-id="${count}">
+    <div class="flip-card card-selection-option ${cardType}"  id="card-selection-option-${count}" data-id="${count}">
         <div class="flip-card-inner">
             <div class="flip-card-front">
-                Card front TBD
+                
             </div>
             <div class="flip-card-back">
 
@@ -33,12 +36,12 @@ function cardOptionTemplate(count) {
     `;
 }
 
-function generateCardUI() {
+function generateCardUI({ role }) {
   // card 1
-  const cardHtml1 = cardOptionTemplate(0);
-  const cardHtml2 = cardOptionTemplate(1);
-  const cardHtml3 = cardOptionTemplate(2);
-  const cardHtml4 = cardOptionTemplate(3);
+  const cardHtml1 = cardOptionTemplate(0, role);
+  const cardHtml2 = cardOptionTemplate(1, role);
+  const cardHtml3 = cardOptionTemplate(2, role);
+  const cardHtml4 = cardOptionTemplate(3, role);
 
   cardContainer.innerHTML = `
     ${cardHtml1}
@@ -224,7 +227,7 @@ export function showCards({ cardDeck, player, isSinglePlayer, onCardClose }) {
     cardContainer.classList.remove('computer-selection');
   }
 
-  generateCardUI();
+  generateCardUI({ role: player.role });
   attachClickHandlers({ cardDeck, player, isSinglePlayer, onCardClose });
   setCardSizes();
 

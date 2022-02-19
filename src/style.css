@@ -321,12 +321,26 @@ div {
   border-radius: 5px;
 }
 
+.card-selection-option .flip-card-front {
+  background-color: transparent;
+  background-size: 100% 100%;
+}
+.card-selection-option.card_commoner .flip-card-front {
+  background-image: url('../static/commoner-card-back.png');
+}
+.card-selection-option.card_mp .flip-card-front {
+  background-image: url('../static/mp-card-back.png');
+}
+
 .flip-card-front {
-  background-color: rgb(250, 235, 215);
+  background-color: transparent;
 }
 
 #cards-selection-container:not(.computer-selection) .flip-card-front:hover {
-  background-color: rgb(240, 215, 184);
+  filter: brightness(0.75);
+}
+#cards-selection-container:not(.computer-selection) .flip-card-front:active {
+  filter: brightness(0.5);
 }
 
 .flip-card-back {
