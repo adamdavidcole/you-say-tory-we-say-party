@@ -321,7 +321,8 @@ div {
   border-radius: 5px;
 }
 
-.card-selection-option .flip-card-front {
+.card-selection-option .flip-card-front,
+.card-selection-option .flip-card-back {
   background-color: transparent;
   background-size: 100% 100%;
 }
@@ -330,6 +331,12 @@ div {
 }
 .card-selection-option.card_mp .flip-card-front {
   background-image: url('../static/mp-card-back.png');
+}
+.card-selection-option.card_commoner .flip-card-back {
+  background-image: url('../static/commoner-card-front-border-4.png');
+}
+.card-selection-option.card_mp .flip-card-back {
+  background-image: url('../static/mp-card-front-border-3.png');
 }
 
 .flip-card-front {
