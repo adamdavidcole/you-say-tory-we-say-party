@@ -664,7 +664,7 @@ button {
   #card-close-button,
   #card-player-subtitle,
   #card-text i {
-    font-size: min(1vw, 2vh);
+    font-size: min(0.9vw, 1.8vh);
     line-height: 1.3;
   }
 
