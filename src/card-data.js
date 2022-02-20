@@ -101,7 +101,7 @@ const MpCards = [
     source: 'https://twitter.com/bbcrosatkins/status/1466721316971728900?lang=en-GB',
   },
   {
-    text: 'Send an email to over one hundred Downing Street staff inviting them “to make the most of the lovely weather and have some socially distanced drinks in the No 10 garden this evening.... bring your own booze!”',
+    text: 'Send an email to over one hundred Downing St. staff members inviting them a "bring your own booze” event in the garden',
     positionChangeText: 'Advance to next area',
     computerPositionChangeText: 'He advances to next area.',
     positionChange: POSITION_CHANGE_SPECIAL.ADVANCE,
