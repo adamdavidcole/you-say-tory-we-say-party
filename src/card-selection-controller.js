@@ -180,7 +180,11 @@ function moveCardToCenter(cardIndex) {
   card.style.top = `${centerTop}px`;
 
   setTimeout(() => {
-    card.style.transform = 'scale(2)';
+    if (window.innerWidth < 768) {
+      card.style.transform = 'scale(2.35)';
+    } else {
+      card.style.transform = 'scale(2)';
+    }
 
     card.classList.add('flipped');
   }, delayTime);
