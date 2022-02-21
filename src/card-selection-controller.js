@@ -170,21 +170,29 @@ function moveCardToCenter(cardIndex) {
   const totalWidth = cardContainer.offsetWidth;
   const totalHeight = cardContainer.offsetHeight;
 
-  const centerLeft = totalWidth / 2 - cardWidth / 2;
-  const centerTop = totalHeight / 2 - cardHeight / 2;
+  const nextCardWidth = cardWidth * 2;
+  const nextCardHeight = cardHeight * 2;
+
+  const centerLeft = totalWidth / 2 - nextCardWidth / 2;
+  const centerTop = totalHeight / 2 - nextCardHeight / 2;
 
   const cards = getCardElements();
   const card = cards[cardIndex];
 
+  card.classList.add('focused');
+
   card.style.left = `${centerLeft}px`;
   card.style.top = `${centerTop}px`;
 
+  card.style.width = `${nextCardWidth}px`;
+  card.style.height = `${nextCardHeight}px`;
+
   setTimeout(() => {
-    if (window.innerWidth < 768) {
-      card.style.transform = 'scale(2.35)';
-    } else {
-      card.style.transform = 'scale(2)';
-    }
+    // if (window.innerWidth < 768) {
+    //   card.style.transform = 'scale(2.35)';
+    // } else {
+    //   card.style.transform = 'scale(2)';
+    // }
 
     card.classList.add('flipped');
   }, delayTime);
