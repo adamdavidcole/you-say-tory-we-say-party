@@ -351,10 +351,14 @@ div {
   padding: min(1.5vw, 3vh);
 }
 
-#cards-selection-container:not(.computer-selection) .flip-card-front:hover {
+#cards-selection-container:not(.computer-selection)
+  .card-selection-option:not(.focused)
+  .flip-card-front:hover {
   filter: brightness(0.75);
 }
-#cards-selection-container:not(.computer-selection) .flip-card-front:active {
+#cards-selection-container:not(.computer-selection)
+  .card-selection-option:not(.focused)
+  .flip-card-front:active {
   filter: brightness(0.5);
 }
 
