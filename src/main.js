@@ -324,11 +324,32 @@ for (let i = 0; i < selectPlayerSpriteBtns.length; i++) {
   });
 }
 
+function onAboutUsClick() {
+  const overlayEl = document.getElementById('game-overlay-wrapper');
+  const aboutUsScreenEl = document.getElementById('about-us-screen');
+
+  overlayEl.classList.remove('hidden');
+  aboutUsScreenEl.classList.remove('hidden');
+}
+
+function onAboutUsClose() {
+  const overlayEl = document.getElementById('game-overlay-wrapper');
+  const aboutUsScreenEl = document.getElementById('about-us-screen');
+
+  overlayEl.classList.add('hidden');
+  aboutUsScreenEl.classList.add('hidden');
+}
+
 const gameIntroScreenBtn = document.getElementById('game-intro-screen-btn');
 gameIntroScreenBtn.addEventListener('click', hideGameIntroOverlay);
 
 const gameOverScreenBtn = document.getElementById('game-over-screen-btn');
 gameOverScreenBtn.addEventListener('click', onGameOverBtnClick);
+
+const aboutUsButton = document.getElementById('about-us-button');
+aboutUsButton.addEventListener('click', onAboutUsClick);
+const aboutUsCloseButton = document.getElementById('about-us-screen-close');
+aboutUsCloseButton.addEventListener('click', onAboutUsClose);
 
 const gameDisplay = new GameDisplay(gameState);
 
