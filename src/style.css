@@ -119,6 +119,11 @@ div {
   font-size: min(1.2vw, 2.4vh); /* 16px */
 }
 
+.highlight {
+  text-transform: uppercase;
+  color: brown;
+}
+
 .select-player-count {
   display: flex;
   justify-content: space-between;
